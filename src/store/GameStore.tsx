@@ -7,7 +7,8 @@ const useGameStore = create<GameState>()((set: SetState<GameState>) => ({
     board: [],
     generatePlayerHand: (pokemonData: PokemonData) =>
         set((state) => ({
-            playerHand: [...state.playerHand, pokemonData],
+            // playerHand: [...state.playerHand, pokemonData],
+            playerHand: pokemonData,
         })),
 }));
 export default useGameStore;
