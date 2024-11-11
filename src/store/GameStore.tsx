@@ -6,8 +6,7 @@ const useGameStore = create<GameState>()((set: SetState<GameState>) => ({
     opponentHand: [],
     board: [],
     generatePlayerHand: (pokemonData: PokemonData) =>
-        set((state) => ({
-            // playerHand: [...state.playerHand, pokemonData],
+        set(() => ({
             playerHand: pokemonData,
         })),
 }));

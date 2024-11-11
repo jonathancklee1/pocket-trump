@@ -1,9 +1,9 @@
 import { CardProps } from "../types/GameTypes";
 
 function Card({ cardData }: CardProps) {
-    console.log(cardData);
+    // console.log(cardData);
     return (
-        <div className=" md:w-[300px] aspect-[63/88] px-3 py-2 bg-[#7D78A3] text-black rounded-xl border-8 border-[#FFDE00]">
+        <div className=" md:w-[300px] aspect-[63/88] px-3 py-2 bg-[#7D78A3] text-black rounded-xl border-8 border-[#FFDE00] overflow-hidden">
             <p className="text-4xl font-bold capitalize mb-3">
                 {cardData?.name}
             </p>
