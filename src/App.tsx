@@ -5,9 +5,7 @@ function App() {
     return (
         <>
             <div className="bg-[#bdd4ea]">
-                <header className="w-full flex justify-center pt-10">
-                    <Heading />
-                </header>
+                <Heading />
                 <main className="">
                     <GameBoard />
                 </main>

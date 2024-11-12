@@ -7,10 +7,23 @@ export interface PokemonData {
 export interface GameState {
     playerHand: [];
     opponentHand: [];
-    board: [];
+    playerActiveCard: PokemonCard;
+    opponentActiveCard: PokemonCard;
     generatePlayerHand: (pokemonData: PokemonData) => void;
+    setPlayerActiveCard: () => void;
+    setOpponentActiveCard: () => void;
 }
 
 export interface CardProps {
-    cardData: PokemonData;
+    cardData: PokemonCard;
+}
+
+export interface PokemonCard {
+    name: string;
+    sprite: string;
+    stats: {
+        name: string;
+        value: number;
+    }[];
+    types: string[];
 }
