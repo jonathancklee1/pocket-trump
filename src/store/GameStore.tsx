@@ -68,6 +68,10 @@ const useGameStore = create<GameState>()((set: SetState<GameState>) => ({
         set(() => ({
             playerHand: pokemonData,
         })),
+    generateOpponentHand: (pokemonData: PokemonData) =>
+        set(() => ({
+            opponentHand: pokemonData,
+        })),
     setPlayerActiveCard: () =>
         set((state) => ({
             playerActiveCard: state.playerHand[0],

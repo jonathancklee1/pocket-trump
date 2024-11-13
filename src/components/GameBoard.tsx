@@ -8,33 +8,40 @@ function GameBoard() {
     const pokemonMaxId = 1025;
     const cardCount = 10;
 
-    const { data, pending } = useMultipleApi(cardCount, pokemonMaxId);
-    console.table(data);
+    const playerCards = useMultipleApi(cardCount, pokemonMaxId);
+    const opponentCards = useMultipleApi(cardCount, pokemonMaxId);
+    console.table(playerCards.data);
 
     const {
-        playerHand,
         playerActiveCard,
         setPlayerActiveCard,
         generatePlayerHand,
+        opponentActiveCard,
+        setOpponentActiveCard,
+        generateOpponentHand,
     } = useGameStore();
 
     useEffect(() => {
-        if (data) {
-            generatePlayerHand(data);
+        if (playerCards.data && opponentCards.data) {
+            generatePlayerHand(playerCards.data);
             setPlayerActiveCard();
+            generateOpponentHand(opponentCards.data);
+            setOpponentActiveCard();
         }
-    }, [pending]);
+    }, [playerCards.pending, opponentCards.pending]);
 
     return (
         <div className="h-screen grid place-items-center">
             <div className="relative h-4/5 w-4/5 border-2 border-black grid">
-                <div className="w-full h-full border-2 border-black bg-[#CC0000]"></div>
-                <div className="w-full h-full border-2 border-black bg-[#3B4CCA]"></div>
-                <div className=" w-full justify-between">
-                    {/* {playerHand.map((card: PokemonData, index) => {
-                        return <Card cardData={formatCard(card)} key={index} />;
-                    })} */}
-                    <Card cardData={formatCard(playerActiveCard)} />
+                <div className="w-full h-full border-2 border-black bg-[#CC0000]">
+                    <div className="top-0 absolute inset-0 w-full h-full">
+                        <Card cardData={formatCard(opponentActiveCard)} />
+                    </div>
+                </div>
+                <div className="relative w-full h-full border-2 border-black bg-[#3B4CCA]">
+                    <div className="absolute inset-0 w-full h-full">
+                        <Card cardData={formatCard(playerActiveCard)} />
+                    </div>
                 </div>
             </div>
         </div>

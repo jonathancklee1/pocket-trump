@@ -10,6 +10,7 @@ export interface GameState {
     playerActiveCard: PokemonCard;
     opponentActiveCard: PokemonCard;
     generatePlayerHand: (pokemonData: PokemonData) => void;
+    generateOpponentHand: (pokemonData: PokemonData) => void;
     setPlayerActiveCard: () => void;
     setOpponentActiveCard: () => void;
 }

@@ -3,12 +3,12 @@ import { CardProps } from "../types/GameTypes";
 function Card({ cardData }: CardProps) {
     console.log(cardData);
     return (
-        <div className=" md:w-[300px]  px-3 py-2 bg-[#81affe] text-black rounded-xl border-[12px] border-[#FFDE00] overflow-hidden">
-            <p className="text-4xl font-bold capitalize mb-3">
+        <div className="shrink-0  hover:scale-100 focus:scale-100 md:w-[300px]  px-3 py-2 bg-[#81affe] text-black rounded-xl border-[12px] border-[#FFDE00] overflow-hidden max-w-[240px] ">
+            <p className="text-4xl font-bold capitalize mb-2">
                 {cardData?.name}
             </p>
 
-            <div className="bg-slate-50 aspect-video w-full overflow-hidden flex justify-center items-center mb-3 border-4 border-gray-400">
+            <div className="bg-slate-50 aspect-video w-full overflow-hidden flex justify-center items-center mb-2 border-4 border-gray-400">
                 <picture className="h-full">
                     <img
                         src={cardData?.sprite}
@@ -18,12 +18,12 @@ function Card({ cardData }: CardProps) {
                 </picture>
             </div>
 
-            <div className="px-3 py-5 bg-[#a3c5ff]">
-                <div className="flex gap-2 mb-4">
+            <div className="px-3 py-3 bg-[#a3c5ff]">
+                <div className="flex gap-2 mb-2">
                     {cardData?.types?.map((type) => {
                         return (
                             <span
-                                className="text-sm font-semibold uppercase px-2 py-1 rounded-3xl cursor-pointer shadow-2xl bg-red-700 text-white "
+                                className="text-sm font-semibold uppercase px-3 py-1 rounded-3xl cursor-pointer shadow-2xl bg-red-700 text-white "
                                 key={type}
                             >
                                 {type}
@@ -33,9 +33,10 @@ function Card({ cardData }: CardProps) {
                 </div>
                 {cardData?.stats?.map((stat) => {
                     return (
-                        <div
-                            className="text-md mb-4 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border border-white "
+                        <button
+                            className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border border-white "
                             key={stat.name}
+                            type="button"
                         >
                             <span className="uppercase font-semibold">
                                 {stat.name}:{" "}
@@ -43,7 +44,7 @@ function Card({ cardData }: CardProps) {
                             <span className="uppercase font-semibold">
                                 {stat.value}
                             </span>
-                        </div>
+                        </button>
                     );
                 })}
             </div>
