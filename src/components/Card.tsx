@@ -3,8 +3,8 @@ import { CardProps } from "../types/GameTypes";
 function Card({ cardData }: CardProps) {
     console.log(cardData);
     return (
-        <div className="shrink-0  hover:scale-100 focus:scale-100 md:w-[300px]  px-3 py-2 bg-[#81affe] text-black rounded-xl border-[12px] border-[#FFDE00] overflow-hidden max-w-[240px] ">
-            <p className="text-4xl font-bold capitalize mb-2">
+        <div className="shrink-0 px-3 py-2 bg-[#81affe] text-black rounded-xl border-[12px] border-[#FFDE00] overflow-hidden max-w-[320px] z-10 scale-[40%]">
+            <p className="text-2xl md:text-4xl font-bold capitalize mb-1">
                 {cardData?.name}
             </p>
 

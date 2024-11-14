@@ -31,15 +31,15 @@ function GameBoard() {
     }, [playerCards.pending, opponentCards.pending]);
 
     return (
-        <div className="h-screen grid place-items-center">
+        <div className="h-screen grid place-items-center overflow-hidden">
             <div className="relative h-4/5 w-4/5 border-2 border-black grid">
-                <div className="w-full h-full border-2 border-black bg-[#CC0000]">
-                    <div className="top-0 absolute inset-0 w-full h-full">
+                <div className="relative  w-full h-full border-2 border-black bg-[#CC0000]">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center">
                         <Card cardData={formatCard(opponentActiveCard)} />
                     </div>
                 </div>
-                <div className="relative w-full h-full border-2 border-black bg-[#3B4CCA]">
-                    <div className="absolute inset-0 w-full h-full">
+                <div className=" relative w-full h-full border-2 border-black bg-[#3B4CCA] grid place-items-center">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center ">
                         <Card cardData={formatCard(playerActiveCard)} />
                     </div>
                 </div>
