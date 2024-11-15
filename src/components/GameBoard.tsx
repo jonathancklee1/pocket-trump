@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameStore from "../store/GameStore";
 import { PokemonData } from "../types/GameTypes";
 import useMultipleApi from "../hooks/useRandomPokemonArray";
+import PlayerStatus from "./PlayerStatus";
+import CardModal from "./CardModal";
 
 function GameBoard() {
     const pokemonMaxId = 1025;
     const cardCount = 10;
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const playerCards = useMultipleApi(cardCount, pokemonMaxId);
     const opponentCards = useMultipleApi(cardCount, pokemonMaxId);
-    console.table(playerCards.data);
+    console.log(playerCards.data);
 
     const {
         playerActiveCard,
@@ -32,6 +35,9 @@ function GameBoard() {
 
     return (
         <div className="h-screen grid place-items-center overflow-hidden">
+            <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+                <Card cardData={formatCard(playerActiveCard)} isFullSize />
+            </CardModal>
             <div className="relative h-4/5 w-4/5 border-2 border-black grid">
                 <div className="relative  w-full h-full border-2 border-black bg-[#CC0000]">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center">
@@ -40,8 +46,17 @@ function GameBoard() {
                 </div>
                 <div className=" relative w-full h-full border-2 border-black bg-[#3B4CCA] grid place-items-center">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center ">
-                        <Card cardData={formatCard(playerActiveCard)} />
+                        <Card
+                            cardData={formatCard(playerActiveCard)}
+                            onClickEvent={() => setIsModalOpen(true)}
+                        />
                     </div>
+                </div>
+                <div className="absolute bottom-0 left-0 translate-y-full pt-3 w-full">
+                    <PlayerStatus isInverse={false} />
+                </div>
+                <div className="absolute top-0 right-0 -translate-y-full pb-3 w-full">
+                    <PlayerStatus isInverse />
                 </div>
             </div>
         </div>

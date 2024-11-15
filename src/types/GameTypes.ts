@@ -13,10 +13,13 @@ export interface GameState {
     generateOpponentHand: (pokemonData: PokemonData) => void;
     setPlayerActiveCard: () => void;
     setOpponentActiveCard: () => void;
+    reAddToPlayerHand: () => void;
 }
 
 export interface CardProps {
     cardData: PokemonCard;
+    onClickEvent?: () => void;
+    isFullSize?: boolean;
 }
 
 export interface PokemonCard {
@@ -27,4 +30,14 @@ export interface PokemonCard {
         value: number;
     }[];
     types: string[];
+}
+
+export interface PlayerStatusProps {
+    isInverse: boolean;
+}
+
+export interface CardModalProps {
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+    children: React.ReactNode;
 }

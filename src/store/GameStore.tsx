@@ -1,7 +1,7 @@
 import { create, SetState } from "zustand";
 import { GameState, PokemonData } from "../types/GameTypes";
 
-const useGameStore = create<GameState>()((set: SetState<GameState>) => ({
+const useGameStore = create<GameState>()((set, get) => ({
     playerHand: [],
     opponentHand: [],
     playerActiveCard: {
@@ -73,12 +73,19 @@ const useGameStore = create<GameState>()((set: SetState<GameState>) => ({
             opponentHand: pokemonData,
         })),
     setPlayerActiveCard: () =>
-        set((state) => ({
-            playerActiveCard: state.playerHand[0],
+        set(() => ({
+            playerActiveCard: get().playerHand[0],
         })),
     setOpponentActiveCard: () =>
-        set((state) => ({
-            opponentActiveCard: state.opponentHand[0],
+        set(() => ({
+            opponentActiveCard: get().opponentHand[0],
         })),
+    reAddToPlayerHand: () => {
+        const oldHand = [...get().playerHand];
+        oldHand.shift();
+        oldHand.push(get().playerActiveCard);
+        set(() => ({ playerHand: [...oldHand] }));
+        console.log("playerhandAfter", get().playerHand);
+    },
 }));
 export default useGameStore;
