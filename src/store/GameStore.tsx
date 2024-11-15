@@ -84,7 +84,7 @@ const useGameStore = create<GameState>()((set, get) => ({
         const oldHand = [...get().playerHand];
         oldHand.shift();
         oldHand.push(get().playerActiveCard);
-        set(() => ({ playerHand: [...oldHand] }));
+        set(() => ({ playerHand: [...oldHand], playerActiveCard: oldHand[0] }));
         console.log("playerhandAfter", get().playerHand);
     },
 }));
