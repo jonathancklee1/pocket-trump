@@ -80,11 +80,38 @@ const useGameStore = create<GameState>()((set, get) => ({
         set(() => ({
             opponentActiveCard: get().opponentHand[0],
         })),
-    reAddToPlayerHand: () => {
-        const oldHand = [...get().playerHand];
-        oldHand.shift();
-        oldHand.push(get().playerActiveCard);
-        set(() => ({ playerHand: [...oldHand], playerActiveCard: oldHand[0] }));
+    addToPlayerHand: () => {
+        if (get().playerHand.length === 0 || get().opponentHand.length === 0)
+            return;
+        const oldPlayerHand = [...get().playerHand];
+        oldPlayerHand.shift();
+        oldPlayerHand.push(get().playerActiveCard);
+        oldPlayerHand.push(get().opponentActiveCard);
+        const oldOpponentHand = [...get().opponentHand];
+        oldOpponentHand.shift();
+        set(() => ({
+            playerHand: [...oldPlayerHand],
+            playerActiveCard: oldPlayerHand[0],
+            opponentHand: [...oldOpponentHand],
+            opponentActiveCard: oldOpponentHand[0],
+        }));
+        console.log("playerhandAfter", get().playerHand);
+    },
+    addToOpponentHand: () => {
+        if (get().playerHand.length === 0 || get().opponentHand.length === 0)
+            return;
+        const oldOpponentHand = [...get().opponentHand];
+        oldOpponentHand.shift();
+        oldOpponentHand.push(get().playerActiveCard);
+        oldOpponentHand.push(get().opponentActiveCard);
+        const oldPlayerhand = [...get().playerHand];
+        oldOpponentHand.shift();
+        set(() => ({
+            playerHand: [...oldPlayerhand],
+            playerActiveCard: oldPlayerhand[0],
+            opponentHand: [...oldOpponentHand],
+            opponentActiveCard: oldOpponentHand[0],
+        }));
         console.log("playerhandAfter", get().playerHand);
     },
 }));

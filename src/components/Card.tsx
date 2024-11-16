@@ -7,7 +7,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
         playerActiveCard,
         setPlayerActiveCard,
         playerHand,
-        reAddToPlayerHand,
+        addToPlayerHand,
     } = useGameStore();
 
     return (
@@ -51,7 +51,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                                 className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border border-white "
                                 key={stat.name}
                                 type="button"
-                                onClick={() => reAddToPlayerHand()}
+                                onClick={() => addToPlayerHand()}
                             >
                                 <span className="uppercase font-semibold">
                                     {stat.name}:{" "}

@@ -22,6 +22,8 @@ function GameBoard() {
         opponentActiveCard,
         setOpponentActiveCard,
         generateOpponentHand,
+        playerHand,
+        opponentHand,
     } = useGameStore();
 
     useEffect(() => {
@@ -52,11 +54,18 @@ function GameBoard() {
                         />
                     </div>
                 </div>
-                <div className="absolute bottom-0 left-0 translate-y-full pt-3 w-full">
-                    <PlayerStatus isInverse={false} />
-                </div>
                 <div className="absolute top-0 right-0 -translate-y-full pb-3 w-full">
-                    <PlayerStatus isInverse />
+                    <PlayerStatus
+                        isInverse
+                        handCount={opponentHand.length}
+                        name="Opponent"
+                    />
+                </div>
+                <div className="absolute bottom-0 left-0 translate-y-full pt-3 w-full">
+                    <PlayerStatus
+                        handCount={playerHand.length}
+                        name="Player (You)"
+                    />
                 </div>
             </div>
         </div>

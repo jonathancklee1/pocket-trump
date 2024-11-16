@@ -1,9 +1,10 @@
 import React from "react";
 import { PlayerStatusProps } from "../types/GameTypes";
+import useGameStore from "../store/GameStore";
 
-function PlayerStatus({ isInverse }: PlayerStatusProps) {
+function PlayerStatus({ isInverse, handCount, name }: PlayerStatusProps) {
     return (
-        <div className="flex gap-2 items-center justify-between w-full">
+        <div className="flex gap-2 items-center justify-between w-full px-3 py-5 bg-orange-50">
             {/* Profile pic */}
             <div
                 className={`flex gap-2 items-center ${
@@ -14,12 +15,14 @@ function PlayerStatus({ isInverse }: PlayerStatusProps) {
                     <img src="" alt="" />
                 </div>
                 {/* Name */}
-                <p className="text-xl font-semibold">Player</p>
+                <p className="text-xl font-semibold">{name}</p>
             </div>
 
             {/* Score */}
             <div>
-                <span className="font-semibold">Cards in hand: 10</span>
+                <span className="font-semibold">
+                    Cards in hand: {handCount}
+                </span>
             </div>
         </div>
     );

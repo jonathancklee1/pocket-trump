@@ -13,7 +13,7 @@ export interface GameState {
     generateOpponentHand: (pokemonData: PokemonData) => void;
     setPlayerActiveCard: () => void;
     setOpponentActiveCard: () => void;
-    reAddToPlayerHand: () => void;
+    addToPlayerHand: () => void;
 }
 
 export interface CardProps {
@@ -33,7 +33,9 @@ export interface PokemonCard {
 }
 
 export interface PlayerStatusProps {
-    isInverse: boolean;
+    isInverse?: boolean;
+    handCount: number;
+    name: string;
 }
 
 export interface CardModalProps {

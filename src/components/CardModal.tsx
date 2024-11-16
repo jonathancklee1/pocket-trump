@@ -17,8 +17,11 @@ function CardModal({ isOpen, setIsOpen, children }: CardModalProps) {
                     <div className="flex min-h-full items-center justify-center p-4">
                         <DialogPanel
                             transition
-                            className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+                            className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 flex justify-center items-center flex-col"
                         >
+                            <div className="text-3xl font-bold text-white mb-4">
+                                Choose your Stat
+                            </div>
                             {/* Full Size Card */}
                             {children}
                         </DialogPanel>
