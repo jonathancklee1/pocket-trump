@@ -2,13 +2,8 @@ import useGameStore from "../store/GameStore";
 import { CardProps } from "../types/GameTypes";
 
 function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
-    console.log(cardData);
-    const {
-        playerActiveCard,
-        setPlayerActiveCard,
-        playerHand,
-        addToPlayerHand,
-    } = useGameStore();
+    console.log(" card data", cardData);
+    const { setPlayerSelectedStat } = useGameStore();
 
     return (
         <>
@@ -34,11 +29,11 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
 
                 <div className="px-3 py-3 bg-[#a3c5ff]">
                     <div className="flex gap-2 mb-2">
-                        {cardData?.types?.map((type) => {
+                        {cardData?.types?.map((type, index) => {
                             return (
                                 <span
                                     className="text-sm font-semibold uppercase px-3 py-1 rounded-3xl cursor-pointer shadow-2xl bg-red-700 text-white "
-                                    key={type}
+                                    key={index}
                                 >
                                     {type}
                                 </span>
@@ -48,10 +43,12 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                     {cardData?.stats?.map((stat) => {
                         return (
                             <button
-                                className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border border-white "
+                                className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border focus:bg-blue-600 focus:text-white border-white "
                                 key={stat.name}
                                 type="button"
-                                onClick={() => addToPlayerHand()}
+                                onClick={() =>
+                                    setPlayerSelectedStat(stat.name, stat.value)
+                                }
                             >
                                 <span className="uppercase font-semibold">
                                     {stat.name}:{" "}

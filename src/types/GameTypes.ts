@@ -9,11 +9,16 @@ export interface GameState {
     opponentHand: [];
     playerActiveCard: PokemonCard;
     opponentActiveCard: PokemonCard;
+    playerSelectedStat: { name: string | null; value: number | null };
+    opponentSelectedStat: { name: string | null; value: number | null };
     generatePlayerHand: (pokemonData: PokemonData) => void;
     generateOpponentHand: (pokemonData: PokemonData) => void;
     setPlayerActiveCard: () => void;
     setOpponentActiveCard: () => void;
     addToPlayerHand: () => void;
+    addToOpponentHand: () => void;
+    setPlayerSelectedStat: (name: string, value: number) => void;
+    setOpponentSelectedStat: (name: string, value: number) => void;
 }
 
 export interface CardProps {
@@ -41,5 +46,4 @@ export interface PlayerStatusProps {
 export interface CardModalProps {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
-    children: React.ReactNode;
 }

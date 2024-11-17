@@ -1,15 +1,9 @@
-import GameBoard from "./components/GameBoard";
-import Heading from "./components/Heading";
+import GamePage from "./pages/GamePage";
 
 function App() {
     return (
         <>
-            <div className="bg-[#bdd4ea]">
-                <Heading />
-                <main className="">
-                    <GameBoard />
-                </main>
-            </div>
+            <GamePage />
         </>
     );
 }

@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameStore from "../store/GameStore";
 import { PokemonData } from "../types/GameTypes";
-import useMultipleApi from "../hooks/useRandomPokemonArray";
 import PlayerStatus from "./PlayerStatus";
 import CardModal from "./CardModal";
 
-function GameBoard() {
-    const pokemonMaxId = 1025;
-    const cardCount = 10;
+interface GameBoardProps {
+    playerCards: PokemonData[];
+    opponentCards: PokemonData[];
+}
+function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const playerCards = useMultipleApi(cardCount, pokemonMaxId);
-    const opponentCards = useMultipleApi(cardCount, pokemonMaxId);
-    console.log(playerCards.data);
+    console.log(playerCards, opponentCards);
 
     const {
         playerActiveCard,
@@ -27,29 +26,28 @@ function GameBoard() {
     } = useGameStore();
 
     useEffect(() => {
-        if (playerCards.data && opponentCards.data) {
-            generatePlayerHand(playerCards.data);
+        if (playerCards && opponentCards) {
+            generatePlayerHand(playerCards);
+            generateOpponentHand(opponentCards);
             setPlayerActiveCard();
-            generateOpponentHand(opponentCards.data);
             setOpponentActiveCard();
         }
-    }, [playerCards.pending, opponentCards.pending]);
+    }, [playerCards, opponentCards]);
 
     return (
         <div className="h-screen grid place-items-center overflow-hidden">
-            <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-                <Card cardData={formatCard(playerActiveCard)} isFullSize />
-            </CardModal>
+            <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+            {/* <Card cardData={playerActiveCard} isFullSize /> */}
             <div className="relative h-4/5 w-4/5 border-2 border-black grid">
                 <div className="relative  w-full h-full border-2 border-black bg-[#CC0000]">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center">
-                        <Card cardData={formatCard(opponentActiveCard)} />
+                        <Card cardData={opponentActiveCard} />
                     </div>
                 </div>
                 <div className=" relative w-full h-full border-2 border-black bg-[#3B4CCA] grid place-items-center">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center ">
                         <Card
-                            cardData={formatCard(playerActiveCard)}
+                            cardData={playerActiveCard}
                             onClickEvent={() => setIsModalOpen(true)}
                         />
                     </div>
@@ -71,15 +69,5 @@ function GameBoard() {
         </div>
     );
 }
-function formatCard(cardData) {
-    return {
-        name: cardData?.name,
-        sprite: cardData?.sprites?.other?.["official-artwork"]?.front_default,
-        stats: cardData?.stats.map((stat) => ({
-            name: stat?.stat?.name,
-            value: stat?.base_stat,
-        })),
-        types: cardData?.types?.map((type) => type?.type?.name),
-    };
-}
+
 export default GameBoard;
