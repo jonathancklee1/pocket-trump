@@ -33,7 +33,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                             return (
                                 <span
                                     className="text-sm font-semibold uppercase px-3 py-1 rounded-3xl cursor-pointer shadow-2xl bg-red-700 text-white "
-                                    key={index}
+                                    key={type + index}
                                 >
                                     {type}
                                 </span>
@@ -44,17 +44,20 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                         return (
                             <button
                                 className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border focus:bg-blue-600 focus:text-white border-white "
-                                key={stat.name}
+                                key={stat?.name}
                                 type="button"
                                 onClick={() =>
-                                    setPlayerSelectedStat(stat.name, stat.value)
+                                    setPlayerSelectedStat(
+                                        stat?.name,
+                                        stat?.value
+                                    )
                                 }
                             >
                                 <span className="uppercase font-semibold">
-                                    {stat.name}:{" "}
+                                    {stat?.name}:{" "}
                                 </span>
                                 <span className="uppercase font-semibold">
-                                    {stat.value}
+                                    {stat?.value}
                                 </span>
                             </button>
                         );

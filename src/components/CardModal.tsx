@@ -17,16 +17,11 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
     }
     function compareStats() {
         console.log(playerSelectedStat);
-        // SOMETHING WRONG HERE - maybe set opponent selected stat in Card stat click
 
         const opponentCorrespondingStat = opponentActiveCard.stats.find(
             (stat) => stat.name === playerSelectedStat.name
         );
-        // console.log(
-        //     "Opp corresping",
-        //     opponentCorrespondingStat?.name,
-        //     opponentCorrespondingStat?.value
-        // );
+
         setOpponentSelectedStat(
             opponentCorrespondingStat.name,
             opponentCorrespondingStat.value

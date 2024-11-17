@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameStore from "../store/GameStore";
-import { PokemonData } from "../types/GameTypes";
+import { PokemonCard } from "../types/GameTypes";
 import PlayerStatus from "./PlayerStatus";
 import CardModal from "./CardModal";
 
 interface GameBoardProps {
-    playerCards: PokemonData[];
-    opponentCards: PokemonData[];
+    playerCards: PokemonCard[];
+    opponentCards: PokemonCard[];
 }
 function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,10 +27,12 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
 
     useEffect(() => {
         if (playerCards && opponentCards) {
+            console.log("playercards", playerCards);
             generatePlayerHand(playerCards);
             generateOpponentHand(opponentCards);
             setPlayerActiveCard();
             setOpponentActiveCard();
+            // console.log("playeractive", playerActiveCard);
         }
     }, [playerCards, opponentCards]);
 

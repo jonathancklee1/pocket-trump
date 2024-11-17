@@ -1,8 +1,8 @@
-export interface PokemonData {
-    name: string;
-    sprites: { front_default: string };
-    stats: { stat: { name: string }; base_stat: number }[];
-}
+// export interface PokemonData {
+//     name: string;
+//     sprites: { front_default: string };
+//     stats: { stat: { name: string }; base_stat: number }[];
+// }
 
 export interface GameState {
     playerHand: [];
@@ -11,8 +11,8 @@ export interface GameState {
     opponentActiveCard: PokemonCard;
     playerSelectedStat: { name: string | null; value: number | null };
     opponentSelectedStat: { name: string | null; value: number | null };
-    generatePlayerHand: (pokemonData: PokemonData) => void;
-    generateOpponentHand: (pokemonData: PokemonData) => void;
+    generatePlayerHand: (pokemonData: PokemonCard[]) => void;
+    generateOpponentHand: (pokemonData: PokemonCard[]) => void;
     setPlayerActiveCard: () => void;
     setOpponentActiveCard: () => void;
     addToPlayerHand: () => void;

@@ -1,5 +1,5 @@
 import { create, SetState } from "zustand";
-import { GameState, PokemonData } from "../types/GameTypes";
+import { GameState, PokemonCard, PokemonData } from "../types/GameTypes";
 
 const useGameStore = create<GameState>()((set, get) => ({
     playerHand: [],
@@ -33,6 +33,7 @@ const useGameStore = create<GameState>()((set, get) => ({
                 value: 0,
             },
         ],
+        types: [],
     },
     opponentActiveCard: {
         name: "",
@@ -63,6 +64,7 @@ const useGameStore = create<GameState>()((set, get) => ({
                 value: 0,
             },
         ],
+        types: [],
     },
     playerSelectedStat: {
         name: null,
@@ -72,21 +74,24 @@ const useGameStore = create<GameState>()((set, get) => ({
         name: null,
         value: null,
     },
-    generatePlayerHand: (pokemonData: PokemonData) =>
-        set(() => ({
-            playerHand: pokemonData,
-        })),
-    generateOpponentHand: (pokemonData: PokemonData) =>
+    generatePlayerHand: (pokemonData: PokemonCard[]) => {
+        console.log("inner", pokemonData),
+            set(() => ({
+                playerHand: pokemonData,
+            }));
+    },
+    generateOpponentHand: (pokemonData: PokemonCard[]) =>
         set(() => ({
             opponentHand: pokemonData,
         })),
+
     setPlayerActiveCard: () =>
         set(() => ({
-            playerActiveCard: formatCard(get().playerHand[0]),
+            playerActiveCard: get().playerHand[0],
         })),
     setOpponentActiveCard: () =>
         set(() => ({
-            opponentActiveCard: formatCard(get().opponentHand[0]),
+            opponentActiveCard: get().opponentHand[0],
         })),
     addToPlayerHand: () => {
         if (get().playerHand.length === 0 || get().opponentHand.length === 0)
