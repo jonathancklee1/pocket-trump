@@ -1,9 +1,11 @@
+import { useState } from "react";
 import useGameStore from "../store/GameStore";
 import { CardProps } from "../types/GameTypes";
 
 function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
     console.log(" card data", cardData);
     const { setPlayerSelectedStat } = useGameStore();
+    const [selectedButton, setSelectedButton] = useState(null);
 
     return (
         <>
@@ -17,7 +19,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                     {cardData?.name}
                 </p>
 
-                <div className="bg-slate-50 aspect-video w-full overflow-hidden flex justify-center items-center mb-2 border-4 border-gray-400">
+                <div className="bg-slate-50 aspect-video w-full overflow-hidden flex justify-center items-center mb-2 border-4 border-gray-400 bg-[url('https://picsum.photos/id/15/2500/1667')] bg-cover">
                     <picture className="h-full">
                         <img
                             src={cardData?.sprite}
@@ -40,17 +42,25 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
                             );
                         })}
                     </div>
-                    {cardData?.stats?.map((stat) => {
+                    {cardData?.stats?.map((stat, index) => {
                         return (
                             <button
-                                className="w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border focus:bg-blue-600 focus:text-white border-white "
+                                className={`w-full text-sm last-of-type:mb-0 mb-2 flex justify-between px-4 py-2 rounded-3xl cursor-pointer shadow-2xl hover:shadow-inner border  border-white ${
+                                    selectedButton === index &&
+                                    "bg-blue-600 text-white"
+                                }`}
                                 key={stat?.name}
                                 type="button"
-                                onClick={() =>
-                                    setPlayerSelectedStat(
-                                        stat?.name,
-                                        stat?.value
-                                    )
+                                onClick={
+                                    isFullSize
+                                        ? () => {
+                                              setSelectedButton(index);
+                                              setPlayerSelectedStat(
+                                                  stat?.name,
+                                                  stat?.value
+                                              );
+                                          }
+                                        : undefined
                                 }
                             >
                                 <span className="uppercase font-semibold">

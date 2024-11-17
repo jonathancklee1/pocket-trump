@@ -66,20 +66,20 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                                 Choose your Stat
                             </div>
                             {/* Full Size Card */}
-                            {/* {children} */}
                             <Card
                                 cardData={playerActiveCard}
                                 isFullSize={true}
                             />
                             <button
-                                className=" p-3 mt-3 rounded-xl bg-[#37a4e8] text-white"
+                                className="py-3 px-5 mt-3 rounded-3xl bg-[#1647c5] text-white"
                                 onClick={() => {
                                     if (playerSelectedStat.name === null) {
                                         alert("Please select a stat");
                                         return;
                                     }
                                     compareStats();
-                                    // close();
+
+                                    close();
                                 }}
                             >
                                 Confirm Stat Choice

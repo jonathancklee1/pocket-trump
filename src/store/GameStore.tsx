@@ -97,10 +97,10 @@ const useGameStore = create<GameState>()((set, get) => ({
         if (get().playerHand.length === 0 || get().opponentHand.length === 0)
             return;
         const oldPlayerHand = [...get().playerHand];
+        const oldOpponentHand = [...get().opponentHand];
         oldPlayerHand.shift();
         oldPlayerHand.push(get().playerHand[0]);
         oldPlayerHand.push(get().opponentHand[0]);
-        const oldOpponentHand = [...get().opponentHand];
         oldOpponentHand.shift();
         set(() => ({
             playerHand: [...oldPlayerHand],
@@ -108,24 +108,22 @@ const useGameStore = create<GameState>()((set, get) => ({
             opponentHand: [...oldOpponentHand],
             opponentActiveCard: oldOpponentHand[0],
         }));
-        // console.log("playerhandAfter", get().playerHand);
     },
     addToOpponentHand: () => {
         if (get().playerHand.length === 0 || get().opponentHand.length === 0)
             return;
         const oldOpponentHand = [...get().opponentHand];
+        const oldPlayerhand = [...get().playerHand];
         oldOpponentHand.shift();
         oldOpponentHand.push(get().playerHand[0]);
         oldOpponentHand.push(get().opponentHand[0]);
-        const oldPlayerhand = [...get().playerHand];
-        oldOpponentHand.shift();
+        oldPlayerhand.shift();
         set(() => ({
             playerHand: [...oldPlayerhand],
             playerActiveCard: oldPlayerhand[0],
             opponentHand: [...oldOpponentHand],
             opponentActiveCard: oldOpponentHand[0],
         }));
-        // console.log("playerhandAfter", get().playerHand);
     },
     setPlayerSelectedStat: (statName: string, statValue: number) => {
         console.log(statName, statValue),
