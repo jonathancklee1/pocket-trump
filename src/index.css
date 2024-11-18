@@ -5,13 +5,13 @@
 *,
 *::before,
 *::after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Noto Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
