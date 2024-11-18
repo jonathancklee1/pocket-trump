@@ -2,8 +2,10 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { CardModalProps } from "../types/GameTypes";
 import useGameStore from "../store/GameStore";
 import Card from "./Card";
+import { useState } from "react";
 
 function CardModal({ isOpen, setIsOpen }: CardModalProps) {
+  const [opponentStat, setOpponentStat] = useState({});
   const {
     playerSelectedStat,
     playerActiveCard,
@@ -11,6 +13,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
     addToOpponentHand,
     setOpponentSelectedStat,
     opponentActiveCard,
+    opponentSelectedStat,
   } = useGameStore();
   function close() {
     setIsOpen(false);
@@ -66,7 +69,28 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 Choose your Stat
               </div>
               {/* Full Size Card */}
-              <Card cardData={playerActiveCard} isFullSize={true} />
+              <div className="hidden">
+                <Card cardData={opponentActiveCard} isFullSize={true} />
+              </div>
+              <div className="flex hidden flex-col justify-center text-2xl font-semibold text-white">
+                <span className="mb-14 text-center uppercase">
+                  {playerSelectedStat.name}
+                </span>
+                <div className="flex items-center gap-4">
+                  <div className="relative grid size-20 place-items-center rounded-full bg-blue-950 p-4">
+                    <span className="absolute -top-10">You</span>
+                    <span>{playerSelectedStat.value}</span>
+                  </div>
+                  <span>VS</span>
+                  <div className="relative grid size-20 place-items-center rounded-full bg-red-900 p-4">
+                    <span className="absolute -top-10">Opponent</span>
+                    <span>{opponentSelectedStat.value}</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Card cardData={playerActiveCard} isFullSize={true} />
+              </div>
               <button
                 className="mt-3 rounded-3xl bg-[#1647c5] px-5 py-3 text-white"
                 onClick={() => {
@@ -76,7 +100,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                   }
                   compareStats();
 
-                  close();
+                  // close();
                 }}
               >
                 Confirm Stat Choice
