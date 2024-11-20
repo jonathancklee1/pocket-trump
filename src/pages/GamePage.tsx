@@ -28,7 +28,7 @@ function GamePage() {
 
   console.log("formatted", formattedPlayerCards, formattedOpponentCards);
   return (
-    <div className="bg-[#bdd4ea]">
+    <div className="bg-[#04081e]">
       {/* <Heading /> */}
       <main className="">
         <GameBoard

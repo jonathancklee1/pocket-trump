@@ -104,9 +104,9 @@ const useGameStore = create<GameState>()((set, get) => ({
     oldOpponentHand.shift();
     set(() => ({
       playerHand: [...oldPlayerHand],
-      playerActiveCard: oldPlayerHand[0],
+      // playerActiveCard: oldPlayerHand[0],
       opponentHand: [...oldOpponentHand],
-      opponentActiveCard: oldOpponentHand[0],
+      // opponentActiveCard: oldOpponentHand[0],
     }));
   },
   addToOpponentHand: () => {
@@ -120,9 +120,9 @@ const useGameStore = create<GameState>()((set, get) => ({
     oldPlayerhand.shift();
     set(() => ({
       playerHand: [...oldPlayerhand],
-      playerActiveCard: oldPlayerhand[0],
+      // playerActiveCard: oldPlayerhand[0],
       opponentHand: [...oldOpponentHand],
-      opponentActiveCard: oldOpponentHand[0],
+      // opponentActiveCard: oldOpponentHand[0],
     }));
   },
   setPlayerSelectedStat: (statName: string, statValue: number) => {
@@ -139,15 +139,3 @@ const useGameStore = create<GameState>()((set, get) => ({
   },
 }));
 export default useGameStore;
-
-function formatCard(cardData) {
-  return {
-    name: cardData?.name,
-    sprite: cardData?.sprites?.other?.["official-artwork"]?.front_default,
-    stats: cardData?.stats.map((stat) => ({
-      name: stat?.stat?.name,
-      value: stat?.base_stat,
-    })),
-    types: cardData?.types?.map((type) => type?.type?.name),
-  };
-}

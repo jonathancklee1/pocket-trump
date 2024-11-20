@@ -11,6 +11,19 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
   const modal = useRef<HTMLDivElement>(null);
   // const showStatsTl = useRef<gsap.core.Timeline>();
   const { contextSafe } = useGSAP({ scope: modal });
+  const {
+    playerSelectedStat,
+    playerActiveCard,
+    addToPlayerHand,
+    addToOpponentHand,
+    setOpponentSelectedStat,
+    opponentActiveCard,
+    opponentSelectedStat,
+    setPlayerActiveCard,
+    setOpponentActiveCard,
+  } = useGameStore();
+
+  const [playerResult, setPlayerResult] = useState("");
 
   const onStatConfirmClick = contextSafe(() => {
     const showStatsTl = gsap.timeline({
@@ -20,39 +33,39 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
       .to("#modal-title, #confirm-button", {
         display: "none",
       })
+      .to("#player-card", {
+        scale: 0.5,
+        position: "absolute",
+        bottom: "-130px",
+
+        ease: "power2",
+        duration: 0.75,
+      })
       .to("#opponent-card", {
         display: "block",
         position: "absolute",
         top: "-130px",
         scale: 0.5,
+        ease: "power2",
+        duration: 0.75,
       })
-      .to("#player-card", {
-        scale: 0.5,
-        position: "absolute",
-        bottom: "-130px",
-      })
+
       .to("#stats-container", {
         display: "flex",
+        ease: "power2",
+        duration: 0.75,
+        opacity: 1,
       });
 
     showStatsTl.play();
     showStatsTl.then(() => {
       setTimeout(() => {
         close();
-      }, 4000);
+        setPlayerActiveCard();
+        setOpponentActiveCard();
+      }, 2500);
     });
   });
-  const {
-    playerSelectedStat,
-    playerActiveCard,
-    addToPlayerHand,
-    addToOpponentHand,
-    setOpponentSelectedStat,
-    opponentActiveCard,
-    opponentSelectedStat,
-  } = useGameStore();
-
-  const [playerResult, setPlayerResult] = useState("");
 
   function close() {
     setIsOpen(false);
@@ -119,7 +132,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
               </div>
               <div
                 id="stats-container"
-                className="flex hidden flex-col justify-center text-xl font-semibold text-white"
+                className="flex hidden flex-col justify-center text-xl font-semibold text-white opacity-0"
               >
                 <span className="mb-2 text-center uppercase">
                   {playerSelectedStat.name}
