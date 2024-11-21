@@ -55,6 +55,24 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         ease: "power2",
         duration: 0.75,
         opacity: 1,
+      })
+      .to("#battle-type-text", {
+        display: "block",
+        ease: "ease",
+        duration: 0.75,
+        opacity: 1,
+      })
+      .to("#result-stats", {
+        display: "flex",
+        ease: "ease",
+        duration: 0.75,
+        opacity: 1,
+      })
+      .to("#player-result-text", {
+        display: "block",
+        ease: "ease",
+        duration: 0.75,
+        opacity: 1,
       });
 
     showStatsTl.play();
@@ -63,7 +81,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         close();
         setPlayerActiveCard();
         setOpponentActiveCard();
-      }, 2500);
+      }, 9500);
     });
   });
 
@@ -76,6 +94,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
       return;
     }
     compareStats();
+    onStatConfirmClick();
   }
 
   function compareStats() {
@@ -134,21 +153,32 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 id="stats-container"
                 className="flex hidden flex-col justify-center text-xl font-semibold text-white opacity-0"
               >
-                <span className="mb-2 text-center uppercase">
-                  {playerSelectedStat.name}
+                <span
+                  id="battle-type-text"
+                  className="mb-2 hidden text-center uppercase opacity-0"
+                >
+                  {playerSelectedStat.name} battle
                 </span>
-                <span className="mb-12 text-center uppercase">
+                <span
+                  id="player-result-text"
+                  className="mb-2 hidden text-center text-2xl uppercase opacity-0"
+                >
                   {playerResult}
                 </span>
-                <div className="flex items-center gap-4">
-                  <div className="relative grid size-20 place-items-center rounded-full bg-blue-600 p-4">
-                    <span className="absolute -top-10">You</span>
+                <div
+                  id="result-stats"
+                  className="flex hidden items-center justify-center gap-4 opacity-0"
+                >
+                  <div className="relative grid size-20 place-items-center rounded-full border-4 border-blue-600 bg-white p-4 text-black">
                     <span>{playerSelectedStat.value}</span>
+                    <span className="absolute -bottom-10 text-white">You</span>
                   </div>
                   <span>VS</span>
-                  <div className="relative grid size-20 place-items-center rounded-full bg-red-900 p-4">
-                    <span className="absolute -top-10">Opponent</span>
+                  <div className="relative grid size-20 place-items-center rounded-full border-4 border-red-900 bg-white p-4 text-black">
                     <span>{opponentSelectedStat.value}</span>
+                    <span className="absolute -bottom-10 text-white">
+                      Opponent
+                    </span>
                   </div>
                 </div>
               </div>
@@ -159,7 +189,6 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 id="confirm-button"
                 className="mt-3 rounded-3xl bg-[#2f67f3] px-5 py-3 text-white"
                 onClick={() => {
-                  onStatConfirmClick();
                   confirmStats();
                 }}
               >

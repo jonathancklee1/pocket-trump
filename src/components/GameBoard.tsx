@@ -37,10 +37,15 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
   }, [playerCards, opponentCards]);
 
   return (
-    <div className="grid h-screen place-items-center overflow-hidden">
+    <div className="grid h-screen -translate-y-[50px] place-items-center">
       <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       {/* <Card cardData={playerActiveCard} isFullSize /> */}
-      <div className="relative grid h-4/5 w-4/5 border-2 border-black">
+      <div
+        className="relative grid h-4/5 w-4/5 border-2 border-black"
+        style={{
+          transform: "perspective(80em) rotateX(18deg)",
+        }}
+      >
         <div className="relative h-full w-full border-2 border-black bg-[#831010]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
             <Card cardData={opponentActiveCard} />
