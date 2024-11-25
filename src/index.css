@@ -19,3 +19,41 @@ body {
 .transform-3d {
   transform: perspective(80em) rotateX(18deg);
 }
+.card {
+  perspective: 1000px;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.card-back {
+  position: absolute;
+
+  transform: rotateY(180deg);
+  inset: 0;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.top-circle {
+  border-radius: 999px 999px 0 0;
+}
+.bottom-circle {
+  border-radius: 0 0 999px 999px;
+}

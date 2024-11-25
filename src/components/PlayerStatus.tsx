@@ -1,4 +1,3 @@
-import React from "react";
 import { PlayerStatusProps } from "../types/GameTypes";
 
 import Deckcards from "../assets/svgs/Deckcards";
