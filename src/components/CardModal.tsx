@@ -9,7 +9,6 @@ import { useRef, useState } from "react";
 function CardModal({ isOpen, setIsOpen }: CardModalProps) {
   gsap.registerPlugin(useGSAP);
   const modal = useRef<HTMLDivElement>(null);
-  // const showStatsTl = useRef<gsap.core.Timeline>();
   const { contextSafe } = useGSAP({ scope: modal });
   const {
     playerSelectedStat,
@@ -30,38 +29,54 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
       paused: true,
     });
     showStatsTl
+      .to(".card-modal-panel", {
+        height: "100vh",
+        width: "100vw",
+        duration: 0.6,
+      })
       .to("#modal-title, #confirm-button", {
         display: "none",
       })
       .to("#player-card", {
-        scale: 0.5,
+        scale: 0.6,
         position: "absolute",
-        bottom: "-130px",
+        bottom: "16px",
+        transformOrigin: "bottom",
 
         ease: "power2",
-        duration: 0.75,
+        duration: 0.5,
       })
       .to("#opponent-card", {
         display: "block",
         position: "absolute",
-        top: "-130px",
+        top: "16px",
         scale: 0.5,
+        transformOrigin: "top",
         ease: "power2",
+        duration: 0.5,
+      })
+      .to("#opponent-card > .card > .card-inner", {
+        rotateY: 0,
+        ease: "linear",
         duration: 0.75,
       })
-
       .to("#stats-container", {
         display: "flex",
         ease: "power2",
         duration: 0.75,
         opacity: 1,
       })
-      .to("#battle-type-text", {
-        display: "block",
-        ease: "ease",
-        duration: 0.75,
-        opacity: 1,
-      })
+      .fromTo(
+        "#battle-type-text",
+        { translateX: "-200px", ease: "ease", duration: 0.75 },
+        {
+          display: "block",
+          ease: "ease",
+          duration: 0.75,
+          opacity: 1,
+          translateX: 0,
+        },
+      )
       .to("#result-stats", {
         display: "flex",
         ease: "ease",
@@ -81,7 +96,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         close();
         setPlayerActiveCard();
         setOpponentActiveCard();
-      }, 9500);
+      }, 9999999);
     });
   });
 
@@ -134,10 +149,10 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         ref={modal}
       >
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/80">
-          <div className="flex min-h-full items-center justify-center p-4">
+          <div className="flex min-h-full items-center justify-center">
             <DialogPanel
               transition
-              className="data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full max-w-md flex-col items-center justify-center rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full max-w-md flex-col items-center justify-center rounded-xl bg-white/5 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <div
                 id="modal-title"
@@ -146,12 +161,16 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 Choose your Stat
               </div>
               {/* Full Size Card */}
-              <div id="opponent-card" className="hidden">
-                <Card cardData={opponentActiveCard} isFullSize={true} />
+              <div id="opponent-card" className="opponent-card hidden">
+                <Card
+                  cardData={opponentActiveCard}
+                  isFullSize={true}
+                  isFlipped
+                />
               </div>
               <div
                 id="stats-container"
-                className="flex hidden flex-col justify-center text-xl font-semibold text-white opacity-0"
+                className="flex hidden w-full flex-col justify-center bg-red-600 p-5 text-xl font-semibold text-white opacity-0"
               >
                 <span
                   id="battle-type-text"

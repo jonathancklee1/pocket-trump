@@ -2,7 +2,7 @@ import { useState } from "react";
 import useGameStore from "../store/GameStore";
 import { CardProps } from "../types/GameTypes";
 
-function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
+function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
   console.log(" card data", cardData);
   const { setPlayerSelectedStat } = useGameStore();
   const [selectedButton, setSelectedButton] = useState(null);
@@ -10,7 +10,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
   return (
     <div
       onClick={onClickEvent}
-      className={`card ${!isFullSize && "scale-[50%]"}`}
+      className={`card ${!isFullSize && "scale-[50%]"} ${isFlipped && "flipped"}`}
     >
       {/* Inner */}
       <div className="card-inner z-10 h-full w-full max-w-[320px] shrink-0 rounded-xl border-[12px] border-[#FFDE00] bg-[#81affe] px-3 py-2 text-black">
@@ -68,7 +68,7 @@ function Card({ cardData, onClickEvent, isFullSize }: CardProps) {
           </div>
         </div>
         {/* Back */}
-        <div className="card-back absolute flex items-center justify-center bg-blue-500">
+        <div className="card-back absolute flex items-center justify-center bg-[#3b4cca]">
           <div className="relative h-fit w-2/3">
             <div className="top-circle aspect-[2/1] border-b-[5px] border-b-black bg-red-600 shadow-inner"></div>
             <div className="bottom-circle aspect-[2/1] border-t-[5px] border-t-black bg-white shadow-2xl"></div>

@@ -48,7 +48,7 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
       >
         <div className="relative h-full w-full border-2 border-black bg-[#831010]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
-            <Card cardData={opponentActiveCard} />
+            <Card cardData={opponentActiveCard} isFlipped />
           </div>
         </div>
         <div className="relative grid h-full w-full place-items-center border-2 border-black bg-[#1a2682]">

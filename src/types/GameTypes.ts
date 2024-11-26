@@ -1,9 +1,3 @@
-// export interface PokemonData {
-//     name: string;
-//     sprites: { front_default: string };
-//     stats: { stat: { name: string }; base_stat: number }[];
-// }
-
 export interface GameState {
   playerHand: [];
   opponentHand: [];
@@ -25,6 +19,7 @@ export interface CardProps {
   cardData: PokemonCard;
   onClickEvent?: () => void;
   isFullSize?: boolean;
+  isFlipped?: boolean;
 }
 
 export interface PokemonCard {
