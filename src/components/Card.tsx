@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useGameStore from "../store/GameStore";
 import { CardProps } from "../types/GameTypes";
+import Pokeball from "../assets/Pokeball";
 
 function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
   console.log(" card data", cardData);
@@ -69,13 +70,7 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
         </div>
         {/* Back */}
         <div className="card-back absolute flex items-center justify-center bg-[#3b4cca]">
-          <div className="relative h-fit w-2/3">
-            <div className="top-circle aspect-[2/1] border-b-[5px] border-b-black bg-red-600 shadow-inner"></div>
-            <div className="bottom-circle aspect-[2/1] border-t-[5px] border-t-black bg-white shadow-2xl"></div>
-            <div className="absolute left-1/2 top-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-black">
-              <div className="size-6 rounded-full bg-white"></div>
-            </div>
-          </div>
+          <Pokeball />
         </div>
       </div>
     </div>

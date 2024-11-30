@@ -28,8 +28,7 @@ function GamePage() {
 
   console.log("formatted", formattedPlayerCards, formattedOpponentCards);
   return (
-    <div className="bg-[#04081e]">
-      {/* <Heading /> */}
+    <div className="bg-blue-gradient">
       <main className="">
         <GameBoard
           playerCards={formattedPlayerCards}
@@ -40,7 +39,6 @@ function GamePage() {
   );
 }
 function formatCards(cardData) {
-  // console.log(cardData);
   return {
     name: cardData?.name,
     sprite: cardData?.sprites?.other?.["official-artwork"]?.front_default,
