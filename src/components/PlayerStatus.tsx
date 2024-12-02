@@ -9,7 +9,7 @@ function PlayerStatus({ isInverse, handCount, name }: PlayerStatusProps) {
           ? "polygon(0 33%, 0 100%, 100% 100%, 100% 0, 60% 0, 45% 33%)"
           : "polygon(0 0, 1% 100%, 100% 100%, 100% 39%, 60% 37%, 42% 1%)",
       }}
-      className={`relative flex w-full items-center gap-2 bg-[#baffda] px-3 py-3 text-[#1f2d97] ${isInverse && "justify-end"}`}
+      className={`relative flex w-full items-center gap-2 ${isInverse ? "bg-opponent-status-bar" : "bg-player-status-bar"} px-3 py-3 text-white ${isInverse && "justify-end"}`}
     >
       {/* Profile pic */}
       <div className={`flex items-center gap-2`}>

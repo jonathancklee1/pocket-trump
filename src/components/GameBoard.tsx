@@ -41,17 +41,17 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
       <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       {/* <Card cardData={playerActiveCard} isFullSize /> */}
       <div
-        className="relative grid h-4/5 w-4/5 border-2 border-black"
+        className="relative grid h-4/5 w-4/5 border-2 border-[#eeeeee]"
         style={{
           transform: "perspective(80em) rotateX(18deg)",
         }}
       >
-        <div className="relative h-full w-full border-2 border-black bg-[#831010]">
+        <div className="relative h-full w-full border-2 border-[#eeeeee] bg-[#831010]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
             <Card cardData={opponentActiveCard} isFlipped />
           </div>
         </div>
-        <div className="relative grid h-full w-full place-items-center border-2 border-black bg-[#1a2682]">
+        <div className="relative grid h-full w-full place-items-center border-2 border-[#eeeeee] bg-[#1a2682]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
             <Card
               cardData={playerActiveCard}

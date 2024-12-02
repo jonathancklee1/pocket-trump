@@ -24,6 +24,31 @@ body {
     rgba(0, 144, 192, 1) 100%
   );
 }
+.bg-player-status-bar {
+  background: rgb(63, 55, 201);
+  background: linear-gradient(
+    140deg,
+    rgba(63, 55, 201, 1) 0%,
+    rgba(34, 38, 195, 1) 50%,
+    rgba(123, 69, 252, 1) 100%
+  );
+}
+.bg-opponent-status-bar {
+  background: rgb(185, 0, 2);
+  background: linear-gradient(
+    140deg,
+    rgba(185, 0, 2, 1) 0%,
+    rgba(253, 83, 29, 1) 46%,
+    rgba(252, 175, 69, 1) 100%
+  );
+}
+
+.left-result-path {
+  clip-path: polygon(0 0, 100% 0, 59% 100%, 0% 100%);
+}
+.right-result-path {
+  clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
+}
 
 .heebo-font {
   font-family: "Heebo", sans-serif;

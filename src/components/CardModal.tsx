@@ -38,7 +38,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         display: "none",
       })
       .to("#player-card", {
-        scale: 0.6,
+        scale: 0.5,
         position: "absolute",
         bottom: "16px",
         transformOrigin: "bottom",
@@ -80,13 +80,29 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
       .to("#result-stats", {
         display: "flex",
         ease: "ease",
-        duration: 0.75,
+        duration: 0.5,
         opacity: 1,
+      })
+      .from("#player-result", {
+        translateX: "-100%",
+        ease: "ease",
+        duration: 0.5,
+      })
+      .from("#opponent-result", {
+        translateX: "100%",
+        ease: "ease",
+        duration: 0.5,
+      })
+      .to("#battle-type-text", {
+        display: "block",
+        ease: "ease",
+        duration: 0.5,
+        opacity: 0,
       })
       .to("#player-result-text", {
         display: "block",
         ease: "ease",
-        duration: 0.75,
+        duration: 0.5,
         opacity: 1,
       });
 
@@ -152,7 +168,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
           <div className="flex min-h-full items-center justify-center">
             <DialogPanel
               transition
-              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full max-w-md flex-col items-center justify-center rounded-xl bg-white/5 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <div
                 id="modal-title"
@@ -170,32 +186,44 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
               </div>
               <div
                 id="stats-container"
-                className="flex hidden w-full flex-col justify-center bg-red-600 p-5 text-xl font-semibold text-white opacity-0"
+                className="relative z-10 flex hidden w-full flex-col justify-center bg-[#8fafff] py-4 text-xl font-semibold text-white opacity-0"
               >
                 <span
                   id="battle-type-text"
-                  className="mb-2 hidden text-center uppercase opacity-0"
+                  className="mb-4 hidden text-center text-2xl uppercase opacity-0"
                 >
                   {playerSelectedStat.name} battle
                 </span>
                 <span
                   id="player-result-text"
-                  className="mb-2 hidden text-center text-2xl uppercase opacity-0"
+                  className="absolute right-0 top-3 mb-4 hidden w-full text-center text-4xl uppercase opacity-0"
                 >
                   {playerResult}
                 </span>
                 <div
                   id="result-stats"
-                  className="flex hidden items-center justify-center gap-4 opacity-0"
+                  className="relative flex hidden items-center justify-center opacity-0"
                 >
-                  <div className="relative grid size-20 place-items-center rounded-full border-4 border-blue-600 bg-white p-4 text-black">
-                    <span>{playerSelectedStat.value}</span>
-                    <span className="absolute -bottom-10 text-white">You</span>
+                  <div
+                    className="left-result-path relative grid w-full place-items-center bg-blue-600 p-4 text-white"
+                    id="player-result"
+                  >
+                    <span className="text-3xl">{playerSelectedStat.value}</span>
+                    <span className="absolute left-2 top-2 text-xs text-white">
+                      You
+                    </span>
                   </div>
-                  <span>VS</span>
-                  <div className="relative grid size-20 place-items-center rounded-full border-4 border-red-900 bg-white p-4 text-black">
-                    <span>{opponentSelectedStat.value}</span>
-                    <span className="absolute -bottom-10 text-white">
+                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold">
+                    VS
+                  </span>
+                  <div
+                    className="right-result-path relative grid w-full place-items-center bg-red-600 p-4 text-white"
+                    id="opponent-result"
+                  >
+                    <span className="text-3xl">
+                      {opponentSelectedStat.value}
+                    </span>
+                    <span className="absolute bottom-2 right-2 text-xs text-white">
                       Opponent
                     </span>
                   </div>
