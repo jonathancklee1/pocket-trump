@@ -11,6 +11,7 @@ interface GameBoardProps {
 }
 function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   console.log(playerCards, opponentCards);
 
@@ -32,13 +33,19 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
       generateOpponentHand(opponentCards);
       setPlayerActiveCard();
       setOpponentActiveCard();
-      // console.log("playeractive", playerActiveCard);
     }
   }, [playerCards, opponentCards]);
+  useEffect(() => {
+    setIsGameStarted(true);
+  }, []);
 
   return (
     <div className="grid h-screen -translate-y-[50px] place-items-center">
-      <CardModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      <CardModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        isGameStarted={isGameStarted}
+      />
       {/* <Card cardData={playerActiveCard} isFullSize /> */}
       <div
         className="relative grid h-4/5 w-4/5 border-2 border-[#eeeeee]"

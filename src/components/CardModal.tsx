@@ -4,9 +4,10 @@ import useGameStore from "../store/GameStore";
 import Card from "./Card";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function CardModal({ isOpen, setIsOpen }: CardModalProps) {
+function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
   gsap.registerPlugin(useGSAP);
   const modal = useRef<HTMLDivElement>(null);
   const { contextSafe } = useGSAP({ scope: modal });
@@ -20,9 +21,27 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
     opponentSelectedStat,
     setPlayerActiveCard,
     setOpponentActiveCard,
+    playerHand,
+    opponentHand,
+    returnToHand,
   } = useGameStore();
 
   const [playerResult, setPlayerResult] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const navigateTo = useNavigate();
+  useEffect(() => {}, [opponentHand.length, playerHand.length]);
+
+  function checkWin() {
+    console.log(playerHand.length, opponentHand.length, isGameStarted);
+    if (
+      (opponentHand.length === 0 || playerHand.length === 0) &&
+      isGameStarted
+    ) {
+      alert("Game Over");
+      navigateTo("/results");
+    }
+  }
 
   const onStatConfirmClick = contextSafe(() => {
     const showStatsTl = gsap.timeline({
@@ -110,9 +129,11 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
     showStatsTl.then(() => {
       setTimeout(() => {
         close();
+        setButtonDisabled(false);
         setPlayerActiveCard();
         setOpponentActiveCard();
-      }, 9999999);
+        checkWin();
+      }, 500);
     });
   });
 
@@ -152,6 +173,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
         setPlayerResult("You Lose!");
       } else {
         setPlayerResult("Draw");
+        returnToHand();
       }
     }
   }
@@ -196,7 +218,7 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 </span>
                 <span
                   id="player-result-text"
-                  className="absolute right-0 top-3 mb-4 hidden w-full text-center text-4xl uppercase opacity-0"
+                  className="heebo-font absolute right-0 top-3 mb-4 hidden w-full text-center text-4xl font-bold uppercase opacity-0"
                 >
                   {playerResult}
                 </span>
@@ -237,7 +259,9 @@ function CardModal({ isOpen, setIsOpen }: CardModalProps) {
                 className="mt-3 rounded-3xl bg-[#2f67f3] px-5 py-3 text-white"
                 onClick={() => {
                   confirmStats();
+                  setButtonDisabled(true);
                 }}
+                disabled={buttonDisabled}
               >
                 Confirm Stat Choice
               </button>

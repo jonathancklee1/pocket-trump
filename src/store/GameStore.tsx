@@ -113,11 +113,27 @@ const useGameStore = create<GameState>()((set, get) => ({
     if (get().playerHand.length === 0 || get().opponentHand.length === 0)
       return;
     const oldOpponentHand = [...get().opponentHand];
-    const oldPlayerhand = [...get().playerHand];
+    const oldPlayerHand = [...get().playerHand];
     oldOpponentHand.shift();
     oldOpponentHand.push(get().playerHand[0]);
     oldOpponentHand.push(get().opponentHand[0]);
-    oldPlayerhand.shift();
+    oldPlayerHand.shift();
+    set(() => ({
+      playerHand: [...oldPlayerHand],
+      // playerActiveCard: oldPlayerhand[0],
+      opponentHand: [...oldOpponentHand],
+      // opponentActiveCard: oldOpponentHand[0],
+    }));
+  },
+  returnToHand: () => {
+    if (get().playerHand.length === 0 || get().opponentHand.length === 0)
+      return;
+    const oldOpponentHand = [...get().opponentHand];
+    const oldPlayerHand = [...get().playerHand];
+    oldOpponentHand.push(oldOpponentHand[0]);
+    oldPlayerHand.push(oldPlayerHand[0]);
+    oldOpponentHand.shift();
+    oldPlayerHand.shift();
     set(() => ({
       playerHand: [...oldPlayerhand],
       // playerActiveCard: oldPlayerhand[0],

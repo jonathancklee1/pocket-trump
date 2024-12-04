@@ -11,6 +11,7 @@ export interface GameState {
   setOpponentActiveCard: () => void;
   addToPlayerHand: () => void;
   addToOpponentHand: () => void;
+  returnToHand: () => void;
   setPlayerSelectedStat: (name: string, value: number) => void;
   setOpponentSelectedStat: (name: string, value: number) => void;
 }
@@ -41,4 +42,5 @@ export interface PlayerStatusProps {
 export interface CardModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  isGameStarted: boolean;
 }

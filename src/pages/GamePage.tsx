@@ -5,7 +5,7 @@ import { PokemonCard } from "../types/GameTypes";
 
 function GamePage() {
   const pokemonMaxId = 1025;
-  const cardCount = 10;
+  const cardCount = 2;
   const playerCards = useRandomPokemonArray(cardCount, pokemonMaxId);
   const opponentCards = useRandomPokemonArray(cardCount, pokemonMaxId);
   console.log("gamepage rendered", playerCards, opponentCards);
