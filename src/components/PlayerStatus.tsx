@@ -13,7 +13,7 @@ function PlayerStatus({ isInverse, handCount, name }: PlayerStatusProps) {
     >
       {/* Profile pic */}
       <div className={`flex items-center gap-2`}>
-        <div className="size-8 rounded-full bg-slate-600">
+        <div className="size-8 rounded-full bg-white">
           <img src="" alt="" />
         </div>
         {/* Name */}

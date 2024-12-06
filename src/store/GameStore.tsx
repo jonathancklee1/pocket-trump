@@ -74,6 +74,7 @@ const useGameStore = create<GameState>()((set, get) => ({
     name: null,
     value: null,
   },
+  gameResult: null,
   generatePlayerHand: (pokemonData: PokemonCard[]) => {
     console.log("inner", pokemonData),
       set(() => ({
@@ -141,17 +142,66 @@ const useGameStore = create<GameState>()((set, get) => ({
       // opponentActiveCard: oldOpponentHand[0],
     }));
   },
-  setPlayerSelectedStat: (statName: string, statValue: number) => {
+  setPlayerSelectedStat: (
+    statName: string | null,
+    statValue: number | null,
+  ) => {
     console.log(statName, statValue),
       set(() => ({
         playerSelectedStat: { name: statName, value: statValue },
       }));
   },
-  setOpponentSelectedStat: (statName: string, statValue: number) => {
+  setOpponentSelectedStat: (
+    statName: string | null,
+    statValue: number | null,
+  ) => {
     console.log("inside stat", statName, statValue),
       set(() => ({
         opponentSelectedStat: { name: statName, value: statValue },
       }));
+  },
+
+  checkScore: () => {
+    console.log("check score", get().playerHand, get().opponentHand);
+    if (get().opponentHand.length === 0) {
+      set(() => ({
+        gameResult: "You Win!",
+      }));
+    }
+
+    if (get().playerHand.length === 0) {
+      set(() => ({
+        gameResult: "You Lose!",
+      }));
+    }
+  },
+
+  resetStore: () => {
+    set(() => ({
+      playerHand: [],
+      opponentHand: [],
+      playerActiveCard: {
+        name: "",
+        sprite: "",
+        stats: [],
+        types: [],
+      },
+      opponentActiveCard: {
+        name: "",
+        sprite: "",
+        stats: [],
+        types: [],
+      },
+      gameResult: null,
+      playerSelectedStat: {
+        name: null,
+        value: null,
+      },
+      opponentSelectedStat: {
+        name: null,
+        value: null,
+      },
+    }));
   },
 }));
 export default useGameStore;

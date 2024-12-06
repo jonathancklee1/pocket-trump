@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swords from "../assets/svgs/Swords";
 
 function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
   gsap.registerPlugin(useGSAP);
@@ -24,6 +25,9 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
     playerHand,
     opponentHand,
     returnToHand,
+    checkScore,
+    gameResult,
+    setPlayerSelectedStat,
   } = useGameStore();
 
   const [playerResult, setPlayerResult] = useState("");
@@ -31,17 +35,6 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
 
   const navigateTo = useNavigate();
   useEffect(() => {}, [opponentHand.length, playerHand.length]);
-
-  function checkWin() {
-    console.log(playerHand.length, opponentHand.length, isGameStarted);
-    if (
-      (opponentHand.length === 0 || playerHand.length === 0) &&
-      isGameStarted
-    ) {
-      alert("Game Over");
-      navigateTo("/results");
-    }
-  }
 
   const onStatConfirmClick = contextSafe(() => {
     const showStatsTl = gsap.timeline({
@@ -128,12 +121,18 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
     showStatsTl.play();
     showStatsTl.then(() => {
       setTimeout(() => {
+        console.log(playerHand, opponentHand, isGameStarted);
         close();
         setButtonDisabled(false);
         setPlayerActiveCard();
         setOpponentActiveCard();
-        checkWin();
-      }, 500);
+        checkScore();
+        setPlayerSelectedStat("", null);
+
+        if (gameResult) {
+          navigateTo("/results");
+        }
+      }, 5000);
     });
   });
 
@@ -141,12 +140,14 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
     setIsOpen(false);
   }
   function confirmStats() {
-    if (playerSelectedStat.name === null) {
+    if (playerSelectedStat.name == null) {
       alert("Please select a stat");
-      return;
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+      compareStats();
+      onStatConfirmClick();
     }
-    compareStats();
-    onStatConfirmClick();
   }
 
   function compareStats() {
@@ -167,6 +168,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         addToPlayerHand();
 
         setPlayerResult("You Win!");
+        console.log(playerHand, opponentHand, isGameStarted);
       } else if (playerSelectedStat.value < opponentCorrespondingStat.value) {
         addToOpponentHand();
 
@@ -186,6 +188,9 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         onClose={close}
         ref={modal}
       >
+        {opponentHand.length}
+        {playerHand.length}
+        {"Game" + isGameStarted}
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/80">
           <div className="flex min-h-full items-center justify-center">
             <DialogPanel
@@ -208,7 +213,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
               </div>
               <div
                 id="stats-container"
-                className="relative z-10 flex hidden w-full flex-col justify-center bg-[#8fafff] py-4 text-xl font-semibold text-white opacity-0"
+                className="bg-result-bar relative z-10 flex hidden w-full flex-col justify-center py-4 text-xl font-semibold text-white opacity-0"
               >
                 <span
                   id="battle-type-text"
@@ -256,14 +261,16 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
               </div>
               <button
                 id="confirm-button"
-                className="mt-3 rounded-3xl bg-[#2f67f3] px-5 py-3 text-white"
+                className="font-heebo mt-3 flex items-center gap-2 border-4 border-[#DBE4EE] bg-[#054A91] px-5 py-3 text-xl font-bold text-white"
                 onClick={() => {
                   confirmStats();
-                  setButtonDisabled(true);
                 }}
                 disabled={buttonDisabled}
               >
-                Confirm Stat Choice
+                <span>Lock In</span>
+                <div className="size-4">
+                  <Swords />
+                </div>
               </button>
             </DialogPanel>
           </div>

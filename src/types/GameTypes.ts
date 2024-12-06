@@ -3,6 +3,7 @@ export interface GameState {
   opponentHand: [];
   playerActiveCard: PokemonCard;
   opponentActiveCard: PokemonCard;
+  gameResult: string;
   playerSelectedStat: { name: string | null; value: number | null };
   opponentSelectedStat: { name: string | null; value: number | null };
   generatePlayerHand: (pokemonData: PokemonCard[]) => void;
@@ -14,6 +15,8 @@ export interface GameState {
   returnToHand: () => void;
   setPlayerSelectedStat: (name: string, value: number) => void;
   setOpponentSelectedStat: (name: string, value: number) => void;
+  checkScore: () => void;
+  resetStore: () => void;
 }
 
 export interface CardProps {

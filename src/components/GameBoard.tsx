@@ -4,6 +4,7 @@ import useGameStore from "../store/GameStore";
 import { PokemonCard } from "../types/GameTypes";
 import PlayerStatus from "./PlayerStatus";
 import CardModal from "./CardModal";
+import { useNavigate } from "react-router-dom";
 
 interface GameBoardProps {
   playerCards: PokemonCard[];
@@ -12,6 +13,7 @@ interface GameBoardProps {
 function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const navigateTo = useNavigate();
 
   console.log(playerCards, opponentCards);
 
@@ -24,6 +26,7 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     generateOpponentHand,
     playerHand,
     opponentHand,
+    gameResult,
   } = useGameStore();
 
   useEffect(() => {
@@ -39,6 +42,11 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     setIsGameStarted(true);
   }, []);
 
+  useEffect(() => {
+    if (gameResult) {
+      navigateTo("/results");
+    }
+  }, [gameResult]);
   return (
     <div className="grid h-screen -translate-y-[50px] place-items-center">
       <CardModal

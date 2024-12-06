@@ -49,7 +49,7 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
                 {cardData?.stats?.map((stat, index) => {
                   return (
                     <button
-                      className={`mb-2 flex w-full cursor-pointer items-center justify-between rounded-3xl border border-white px-3 py-2 text-sm shadow-2xl last-of-type:mb-0 hover:shadow-inner ${
+                      className={`mb-2 flex w-full cursor-pointer items-center justify-between rounded-xl border border-white px-3 py-2 text-sm shadow-2xl last-of-type:mb-0 hover:shadow-inner ${
                         selectedButton === index && "bg-blue-600 text-white"
                       }`}
                       key={stat?.name}

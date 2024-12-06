@@ -25,12 +25,11 @@ body {
   );
 }
 .bg-player-status-bar {
-  background: rgb(63, 55, 201);
+  background: rgb(114, 186, 219);
   background: linear-gradient(
     140deg,
-    rgba(63, 55, 201, 1) 0%,
-    rgba(34, 38, 195, 1) 50%,
-    rgba(123, 69, 252, 1) 100%
+    rgba(114, 186, 219, 1) 0%,
+    rgba(92, 91, 194, 1) 100%
   );
 }
 .bg-opponent-status-bar {
@@ -40,6 +39,15 @@ body {
     rgba(185, 0, 2, 1) 0%,
     rgba(253, 83, 29, 1) 46%,
     rgba(252, 175, 69, 1) 100%
+  );
+}
+
+.bg-result-bar {
+  background: rgb(219, 114, 115);
+  background: linear-gradient(
+    140deg,
+    rgba(219, 114, 115, 1) 0%,
+    rgba(91, 124, 194, 1) 100%
   );
 }
 
