@@ -2,11 +2,17 @@ import { useState } from "react";
 import useGameStore from "../store/GameStore";
 import { CardProps } from "../types/GameTypes";
 import Pokeball from "../assets/Pokeball";
+import useTypeDb from "../hooks/useTypeDb";
 
 function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
   console.log(" card data", cardData);
   const { setPlayerSelectedStat } = useGameStore();
   const [selectedButton, setSelectedButton] = useState(null);
+  const typesDb = useTypeDb();
+  function setTypeColour(type: string) {
+    const typeData = typesDb.find((t) => t.name === type);
+    return typeData?.bgColor;
+  }
 
   return (
     <>
@@ -16,7 +22,7 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
           className={`card ${!isFullSize && "scale-[50%]"} ${isFlipped && "flipped"}`}
         >
           {/* Inner */}
-          <div className="card-inner z-10 h-full w-full max-w-[320px] shrink-0 rounded-xl border-[12px] border-[#FFDE00] bg-[#81affe] px-3 py-2 text-black">
+          <div className="card-inner bg-card-background z-10 h-full w-full max-w-[320px] shrink-0 rounded-xl border-[12px] border-[#FFDE00] px-3 py-2 text-white">
             {/* Front */}
             <div className="card-front inset-0">
               <p className="mb-1 text-2xl font-bold capitalize md:text-4xl">
@@ -33,13 +39,14 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
                 </picture>
               </div>
 
-              <div className="bg-[#a3c5ff] px-3 py-3">
+              <div className="bg-card-background px-3 py-3">
                 <div className="mb-2 flex gap-2">
                   {cardData?.types?.map((type, index) => {
                     return (
                       <span
-                        className="cursor-pointer rounded-3xl bg-red-700 px-3 py-1 text-sm font-semibold uppercase text-white shadow-2xl"
+                        className="cursor-pointer rounded-3xl px-3 py-1 text-sm font-semibold uppercase text-white shadow-2xl"
                         key={type + index}
+                        style={{ backgroundColor: setTypeColour(type) }}
                       >
                         {type ?? "Loading..."}
                       </span>
@@ -49,8 +56,8 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
                 {cardData?.stats?.map((stat, index) => {
                   return (
                     <button
-                      className={`mb-2 flex w-full cursor-pointer items-center justify-between rounded-xl border border-white px-3 py-2 text-sm shadow-2xl last-of-type:mb-0 hover:shadow-inner ${
-                        selectedButton === index && "bg-blue-600 text-white"
+                      className={`mb-2 flex w-full cursor-pointer items-center justify-between rounded-xl border border-white px-3 py-2 text-sm shadow-2xl transition-all last-of-type:mb-0 hover:shadow-inner ${
+                        selectedButton === index && "bg-white text-blue-600"
                       }`}
                       key={stat?.name}
                       type="button"

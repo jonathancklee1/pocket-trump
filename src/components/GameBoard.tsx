@@ -61,12 +61,12 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
           transform: "perspective(80em) rotateX(18deg)",
         }}
       >
-        <div className="relative h-full w-full border-2 border-[#eeeeee] bg-[#831010]">
+        <div className="bg-board-red relative h-full w-full border-2 border-[#eeeeee]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
             <Card cardData={opponentActiveCard} isFlipped />
           </div>
         </div>
-        <div className="relative grid h-full w-full place-items-center border-2 border-[#eeeeee] bg-[#1a2682]">
+        <div className="bg-board-blue relative grid h-full w-full place-items-center border-2 border-[#eeeeee]">
           <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-center">
             <Card
               cardData={playerActiveCard}

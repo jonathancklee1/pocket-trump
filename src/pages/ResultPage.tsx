@@ -12,13 +12,13 @@ function ResultPage() {
         </h1>
         <h2 className="heebo-font mb-6 text-center text-4xl font-bold text-white">
           {gameResult === "You Win!"
-            ? "You have beat your opponent!"
+            ? "You have beaten your opponent!"
             : "Your opponent has beaten you! Battle again!"}
         </h2>
       </div>
       <Link
         to="/"
-        className="hover: rounded-full border-4 border-[#f94144] px-6 py-4 text-3xl font-bold text-[#f94144] transition-all duration-500 hover:bg-[#f94144] hover:text-white"
+        className="hover: rounded-2xl border-4 border-[#f94144] px-6 py-4 text-3xl font-bold text-[#f94144] transition-all duration-500 hover:bg-[#f94144] hover:text-white"
         onClick={() => {
           resetStore();
         }}

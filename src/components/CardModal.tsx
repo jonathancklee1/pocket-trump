@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swords from "../assets/svgs/Swords";
+import toast, { Toaster } from "react-hot-toast";
 
 function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
   gsap.registerPlugin(useGSAP);
@@ -32,6 +33,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
 
   const [playerResult, setPlayerResult] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const notify = () => toast("Please select a stat", { id: "stat-alert" });
 
   const navigateTo = useNavigate();
   useEffect(() => {}, [opponentHand.length, playerHand.length]);
@@ -132,7 +134,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         if (gameResult) {
           navigateTo("/results");
         }
-      }, 5000);
+      }, 3000);
     });
   });
 
@@ -140,8 +142,8 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
     setIsOpen(false);
   }
   function confirmStats() {
-    if (playerSelectedStat.name == null) {
-      alert("Please select a stat");
+    if (!playerSelectedStat.name) {
+      notify();
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
@@ -188,14 +190,25 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         onClose={close}
         ref={modal}
       >
-        {opponentHand.length}
-        {playerHand.length}
-        {"Game" + isGameStarted}
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/80">
           <div className="flex min-h-full items-center justify-center">
+            <Toaster
+              reverseOrder={false}
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  border: "1px solid #dd2e31",
+                  padding: "12px",
+                  color: "#fff",
+                  background: "#dd2e31",
+                  zIndex: "9999",
+                  fontWeight: "bold",
+                },
+              }}
+            />
             <DialogPanel
               transition
-              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 px-4 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <div
                 id="modal-title"
@@ -261,7 +274,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
               </div>
               <button
                 id="confirm-button"
-                className="font-heebo mt-3 flex items-center gap-2 border-4 border-[#DBE4EE] bg-[#054A91] px-5 py-3 text-xl font-bold text-white"
+                className="font-heebo button-slanted mt-3 flex w-full max-w-[320px] items-center justify-center gap-2 rounded-md border-[2px] border-[#fff] px-4 py-2 text-xl font-bold text-white hover:bg-[#3683ff] hover:text-[#ffffff]"
                 onClick={() => {
                   confirmStats();
                 }}
