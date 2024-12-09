@@ -17,11 +17,11 @@ body {
 }
 
 .bg-blue-gradient {
-  background: rgb(34, 38, 195);
+  background: rgb(0, 5, 42);
   background: linear-gradient(
     140deg,
-    rgba(34, 38, 195, 1) 0%,
-    rgba(0, 144, 192, 1) 100%
+    rgba(0, 5, 42, 1) 0%,
+    rgba(72, 95, 117, 1) 100%
   );
 }
 .bg-player-status-bar {

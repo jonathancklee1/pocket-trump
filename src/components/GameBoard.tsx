@@ -5,7 +5,10 @@ import { PokemonCard } from "../types/GameTypes";
 import PlayerStatus from "./PlayerStatus";
 import CardModal from "./CardModal";
 import { useNavigate } from "react-router-dom";
-
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import Ash from "../assets/images/ash.png";
+import Gary from "../assets/images/gary.webp";
 interface GameBoardProps {
   playerCards: PokemonCard[];
   opponentCards: PokemonCard[];
@@ -15,8 +18,27 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const navigateTo = useNavigate();
 
-  console.log(playerCards, opponentCards);
-
+  useGSAP(() => {
+    gsap.from("#game-board", {
+      duration: 2,
+      opacity: 0,
+      ease: "ease",
+    });
+    gsap.from("#player-status", {
+      duration: 1,
+      opacity: 0,
+      translateY: 100,
+      ease: "power2",
+      delay: 1,
+    });
+    gsap.from("#opponent-status", {
+      duration: 1,
+      opacity: 0,
+      translateY: -100,
+      ease: "power2",
+      delay: 1,
+    });
+  });
   const {
     playerActiveCard,
     setPlayerActiveCard,
@@ -48,13 +70,15 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     }
   }, [gameResult]);
   return (
-    <div className="grid h-screen -translate-y-[50px] place-items-center">
+    <div
+      id="game-board"
+      className="mx-auto grid h-screen max-w-5xl -translate-y-[50px] place-items-center"
+    >
       <CardModal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         isGameStarted={isGameStarted}
       />
-      {/* <Card cardData={playerActiveCard} isFullSize /> */}
       <div
         className="relative grid h-4/5 w-4/5 border-2 border-[#eeeeee]"
         style={{
@@ -74,15 +98,26 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
             />
           </div>
         </div>
-        <div className="absolute right-0 top-0 w-full -translate-y-full pb-3">
+        <div
+          id="opponent-status"
+          className="absolute right-0 top-0 w-full -translate-y-full pb-3"
+        >
           <PlayerStatus
             isInverse
             handCount={opponentHand.length}
             name="Opponent"
+            avatar={Gary}
           />
         </div>
-        <div className="absolute bottom-0 left-0 w-full translate-y-full pt-3">
-          <PlayerStatus handCount={playerHand.length} name="Player (You)" />
+        <div
+          id="player-status"
+          className="absolute bottom-0 left-0 w-full translate-y-full pt-3"
+        >
+          <PlayerStatus
+            handCount={playerHand.length}
+            name="Player (You)"
+            avatar={Ash}
+          />
         </div>
       </div>
     </div>

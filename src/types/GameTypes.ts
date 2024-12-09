@@ -40,6 +40,7 @@ export interface PlayerStatusProps {
   isInverse?: boolean;
   handCount: number;
   name: string;
+  avatar: string;
 }
 
 export interface CardModalProps {

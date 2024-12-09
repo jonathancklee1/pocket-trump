@@ -35,10 +35,10 @@ function StartPage() {
       </div>
       <Link
         id="start-button"
-        to="/game"
+        to="/menu"
         className="hover: mt-4 animate-bounce rounded-xl border-4 bg-[#dd2e31] px-6 py-4 text-3xl font-bold text-white hover:bg-[#f94144] hover:text-white"
       >
-        Start Game
+        Play
       </Link>
     </div>
   );
