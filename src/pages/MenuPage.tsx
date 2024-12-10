@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import Heading from "../components/Heading";
-import Pokeball from "../assets/Pokeball";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
@@ -45,7 +43,7 @@ function MenuPage() {
           className={`rounded-xl border-[2px] px-3 py-2 text-xl font-bold text-white hover:bg-[#aa191c] hover:text-white ${gameType === "long" && "bg-[#aa191c] text-white"}`}
           onClick={() => setGameType("long")}
         >
-          Long <p className="text-sm">(20 cards)</p>
+          Long <p className="text-sm">(15 cards)</p>
         </button>
       </div>
 
@@ -54,8 +52,8 @@ function MenuPage() {
           id="start-button"
           to={{
             pathname: "/game",
-            state: gameType, // your data array of objects
           }}
+          state={{ gameType: gameType }}
           className="mt-4 rounded-xl border-4 bg-[#dd2e31] px-6 py-4 text-3xl font-bold text-white hover:bg-[#f94144] hover:text-white"
         >
           Start Game

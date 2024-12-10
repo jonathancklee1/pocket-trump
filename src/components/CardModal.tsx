@@ -208,7 +208,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
             />
             <DialogPanel
               transition
-              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 px-4 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative mx-2 flex min-h-[85vh] w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 px-4 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <div
                 id="modal-title"

@@ -2,19 +2,39 @@ import { useEffect, useState } from "react";
 import GameBoard from "../components/GameBoard";
 import useRandomPokemonArray from "../hooks/useRandomPokemonArray";
 import { PokemonCard } from "../types/GameTypes";
+import { useLocation } from "react-router-dom";
 
 function GamePage() {
   const pokemonMaxId = 1025;
-  const cardCount = 2;
+  let cardCount = 2;
+  const location = useLocation();
+  const { gameType } = location.state;
+  useEffect(() => {
+    if (gameType === "quick") {
+      cardCount = 5;
+    } else if (gameType === "medium") {
+      cardCount = 10;
+    } else if (gameType === "long") {
+      cardCount = 15;
+    }
+  }, [gameType]);
+
+  if (gameType === "quick") {
+    cardCount = 5;
+  } else if (gameType === "medium") {
+    cardCount = 10;
+  } else if (gameType === "long") {
+    cardCount = 15;
+  }
   const playerCards = useRandomPokemonArray(cardCount, pokemonMaxId);
   const opponentCards = useRandomPokemonArray(cardCount, pokemonMaxId);
-  console.log("gamepage rendered", playerCards, opponentCards);
   const [formattedPlayerCards, setFormattedPlayerCards] = useState(
     [] as PokemonCard[],
   );
   const [formattedOpponentCards, setFormattedOpponentCards] = useState(
     [] as PokemonCard[],
   );
+
   useEffect(() => {
     if (!playerCards.pending && !opponentCards.pending) {
       setFormattedPlayerCards(
