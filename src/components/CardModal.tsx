@@ -59,7 +59,9 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
 
         ease: "power2",
         duration: 0.5,
+        ...(window.innerWidth > 1024 ? { scale: 0.6 } : {}),
       })
+
       .to("#opponent-card", {
         display: "block",
         position: "absolute",
@@ -68,6 +70,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         transformOrigin: "top",
         ease: "power2",
         duration: 0.5,
+        ...(window.innerWidth > 1024 ? { scale: 0.6 } : {}),
       })
       .to("#opponent-card > .card > .card-inner", {
         rotateY: 0,
@@ -208,7 +211,7 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
             />
             <DialogPanel
               transition
-              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative mx-2 flex min-h-[85vh] w-full max-w-6xl flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 px-4 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
+              className="card-modal-panel data-[closed]:transform-[scale(95%)] relative flex min-h-[85vh] w-full max-w-3xl flex-col items-center justify-center overflow-hidden rounded-xl bg-white/5 py-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <div
                 id="modal-title"

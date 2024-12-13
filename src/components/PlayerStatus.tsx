@@ -20,7 +20,7 @@ function PlayerStatus({
       <div className={`flex items-center gap-2`}>
         <img src={avatar} alt="" className="size-8 rounded-full bg-white" />
         {/* Name */}
-        <p className="text-lg font-semibold">{name}</p>
+        <p className="text-lg font-semibold md:text-xl">{name}</p>
       </div>
 
       {/* Score */}
@@ -28,7 +28,7 @@ function PlayerStatus({
         className={`absolute bottom-0 grid grid-cols-2 place-items-center gap-1 text-xl ${isInverse ? "left-4" : "right-4"}`}
       >
         <Deckcards />
-        <span className="font-semibold">{handCount}</span>
+        <span className="font-semibold md:text-xl">{handCount}</span>
       </div>
     </div>
   );

@@ -3,7 +3,15 @@ import GameBoard from "../components/GameBoard";
 import useRandomPokemonArray from "../hooks/useRandomPokemonArray";
 import { PokemonCard } from "../types/GameTypes";
 import { useLocation } from "react-router-dom";
+import grassScene from "../assets/images/grass-scene.jpg";
+import lakeScene from "../assets/images/lake-scene.webp";
+import mountainScene from "../assets/images/mountain-scene.jpg";
+import waterScene from "../assets/images/water-scene.avif";
+const scenes = [grassScene, lakeScene, mountainScene, waterScene];
 
+function randomScene() {
+  return scenes[Math.floor(Math.random() * scenes.length)];
+}
 function GamePage() {
   const pokemonMaxId = 1025;
   let cardCount = 2;
@@ -67,6 +75,7 @@ function formatCards(cardData) {
       value: stat?.base_stat,
     })),
     types: cardData?.types?.map((type) => type?.type?.name),
+    background: randomScene(),
   };
 }
 

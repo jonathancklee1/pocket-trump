@@ -9,6 +9,7 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
   const { setPlayerSelectedStat } = useGameStore();
   const [selectedButton, setSelectedButton] = useState(null);
   const typesDb = useTypeDb();
+
   function setTypeColour(type: string) {
     const typeData = typesDb.find((t) => t.name === type);
     return typeData?.bgColor;
@@ -19,7 +20,7 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
       {cardData ? (
         <div
           onClick={onClickEvent}
-          className={`card ${!isFullSize && "scale-[50%]"} ${isFlipped && "flipped"}`}
+          className={`card ${!isFullSize && "scale-50 lg:scale-[60%]"} ${isFlipped && "flipped"}`}
         >
           {/* Inner */}
           <div className="card-inner bg-card-background z-10 h-full w-full max-w-[320px] shrink-0 rounded-xl border-[12px] border-[#FFDE00] px-3 py-2 text-white">
@@ -28,8 +29,12 @@ function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
               <p className="mb-1 text-2xl font-bold capitalize md:text-4xl">
                 {cardData?.name ?? "Loading..."}
               </p>
-
-              <div className="mb-2 flex aspect-video w-full min-w-36 items-center justify-center overflow-hidden border-4 border-gray-400 bg-slate-50 bg-[url('https://picsum.photos/id/15/2500/1667')] bg-cover">
+              <div
+                className="mb-2 flex aspect-video w-full min-w-36 items-center justify-center overflow-hidden border-4 border-gray-400 bg-slate-50 bg-cover"
+                style={{
+                  backgroundImage: `url(${cardData?.background})`,
+                }}
+              >
                 <picture className="h-full">
                   <img
                     src={cardData?.sprite}

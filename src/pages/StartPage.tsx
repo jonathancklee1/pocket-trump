@@ -14,12 +14,15 @@ function StartPage() {
     });
     gsap.from("#start-button", {
       duration: 1.5,
-      delay: 0.7,
+      delay: 1.5,
       opacity: 0,
+      ease: "ease",
     });
     gsap.from("#heading", {
-      duration: 1,
+      duration: 2,
+      delay: 1.5,
       opacity: 0,
+      ease: "ease",
     });
   });
   return (

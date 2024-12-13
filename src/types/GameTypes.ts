@@ -34,6 +34,7 @@ export interface PokemonCard {
     value: number;
   }[];
   types: string[];
+  background: string;
 }
 
 export interface PlayerStatusProps {

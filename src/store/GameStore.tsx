@@ -1,5 +1,5 @@
-import { create, SetState } from "zustand";
-import { GameState, PokemonCard, PokemonData } from "../types/GameTypes";
+import { create } from "zustand";
+import { GameState, PokemonCard } from "../types/GameTypes";
 
 const useGameStore = create<GameState>()((set, get) => ({
   playerHand: [],
@@ -34,6 +34,7 @@ const useGameStore = create<GameState>()((set, get) => ({
       },
     ],
     types: [],
+    background: randomScene(),
   },
   opponentActiveCard: {
     name: "",
@@ -65,6 +66,7 @@ const useGameStore = create<GameState>()((set, get) => ({
       },
     ],
     types: [],
+    background: randomScene(),
   },
   playerSelectedStat: {
     name: null,
@@ -105,9 +107,7 @@ const useGameStore = create<GameState>()((set, get) => ({
     oldOpponentHand.shift();
     set(() => ({
       playerHand: [...oldPlayerHand],
-      // playerActiveCard: oldPlayerHand[0],
       opponentHand: [...oldOpponentHand],
-      // opponentActiveCard: oldOpponentHand[0],
     }));
   },
   addToOpponentHand: () => {
@@ -121,9 +121,7 @@ const useGameStore = create<GameState>()((set, get) => ({
     oldPlayerHand.shift();
     set(() => ({
       playerHand: [...oldPlayerHand],
-      // playerActiveCard: oldPlayerhand[0],
       opponentHand: [...oldOpponentHand],
-      // opponentActiveCard: oldOpponentHand[0],
     }));
   },
   returnToHand: () => {
@@ -137,9 +135,8 @@ const useGameStore = create<GameState>()((set, get) => ({
     oldPlayerHand.shift();
     set(() => ({
       playerHand: [...oldPlayerhand],
-      // playerActiveCard: oldPlayerhand[0],
+
       opponentHand: [...oldOpponentHand],
-      // opponentActiveCard: oldOpponentHand[0],
     }));
   },
   setPlayerSelectedStat: (
@@ -185,12 +182,14 @@ const useGameStore = create<GameState>()((set, get) => ({
         sprite: "",
         stats: [],
         types: [],
+        background: "",
       },
       opponentActiveCard: {
         name: "",
         sprite: "",
         stats: [],
         types: [],
+        background: "",
       },
       gameResult: null,
       playerSelectedStat: {
