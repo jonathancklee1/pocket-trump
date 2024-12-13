@@ -1,5 +1,3 @@
-import React from "react";
-
 function Pokeball() {
   return (
     <div className="relative h-fit w-2/3">

@@ -34,7 +34,7 @@ const useGameStore = create<GameState>()((set, get) => ({
       },
     ],
     types: [],
-    background: randomScene(),
+    background: "",
   },
   opponentActiveCard: {
     name: "",
@@ -66,7 +66,7 @@ const useGameStore = create<GameState>()((set, get) => ({
       },
     ],
     types: [],
-    background: randomScene(),
+    background: "",
   },
   playerSelectedStat: {
     name: null,
