@@ -5,7 +5,6 @@ import Pokeball from "../assets/Pokeball";
 import useTypeDb from "../hooks/useTypeDb";
 
 function Card({ cardData, onClickEvent, isFullSize, isFlipped }: CardProps) {
-  console.log(" card data", cardData);
   const { setPlayerSelectedStat } = useGameStore();
   const [selectedButton, setSelectedButton] = useState(null);
   const typesDb = useTypeDb();

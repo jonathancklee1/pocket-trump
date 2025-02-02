@@ -126,7 +126,6 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
     showStatsTl.play();
     showStatsTl.then(() => {
       setTimeout(() => {
-        console.log(playerHand, opponentHand, isGameStarted);
         close();
         setButtonDisabled(false);
         setPlayerActiveCard();
@@ -165,15 +164,12 @@ function CardModal({ isOpen, setIsOpen, isGameStarted }: CardModalProps) {
         opponentCorrespondingStat.value,
       );
     }
-    console.log(opponentCorrespondingStat);
-    console.log("Opp Stat", opponentCorrespondingStat);
 
     if (playerSelectedStat && opponentCorrespondingStat) {
       if (playerSelectedStat.value > opponentCorrespondingStat.value) {
         addToPlayerHand();
 
         setPlayerResult("You Win!");
-        console.log(playerHand, opponentHand, isGameStarted);
       } else if (playerSelectedStat.value < opponentCorrespondingStat.value) {
         addToOpponentHand();
 

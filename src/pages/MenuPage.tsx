@@ -65,18 +65,18 @@ function MenuPage() {
           Choose your Opponent
         </h2>
 
-        <div className="mb-8 flex items-center justify-center gap-4 md:mb-12">
+        <div className="mb-8 flex items-center justify-center md:mb-12 md:gap-6">
           {opponentProfileArray.map((rival) => {
             return (
               <button
-                className={`flex flex-col items-center justify-center gap-4 rounded-xl px-3 py-2 text-xl font-bold hover:scale-105`}
+                className={`flex min-w-[110px] flex-col items-center justify-center gap-4 rounded-xl px-3 py-2 text-xl font-bold hover:scale-105 ${opponent.name === rival.name && "text-[#42a409]"}`}
                 onClick={() => setOpponent(rival.name, rival.avatar)}
                 key={rival.name}
               >
                 <img
                   src={rival.avatar}
                   alt=""
-                  className={`size-12 rounded-full bg-white object-cover object-top ${opponent.name === rival.name && "border-4 border-[#42a409]"}`}
+                  className={`size-14 rounded-full bg-white object-cover object-top md:size-20 ${opponent.name === rival.name && "border-4 border-[#42a409]"}`}
                 />
                 {rival.name}
               </button>
@@ -111,7 +111,7 @@ function MenuPage() {
           </button>
         </div>
         <div className="flex w-full items-center justify-center">
-          {gameType && (
+          {gameType && opponent.name !== "" && (
             <Link
               id="start-button"
               to={{

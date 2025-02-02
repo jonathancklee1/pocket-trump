@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Ash from "../assets/images/ash.png";
-import Gary from "../assets/images/gary.webp";
 interface GameBoardProps {
   playerCards: PokemonCard[];
   opponentCards: PokemonCard[];
@@ -54,7 +53,6 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
 
   useEffect(() => {
     if (playerCards && opponentCards) {
-      console.log("playercards", playerCards);
       generatePlayerHand(playerCards);
       generateOpponentHand(opponentCards);
       setPlayerActiveCard();

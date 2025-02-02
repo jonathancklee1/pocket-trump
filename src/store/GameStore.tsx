@@ -89,10 +89,9 @@ const useGameStore = create<GameState>()((set, get) => ({
       },
     })),
   generatePlayerHand: (pokemonData: PokemonCard[]) => {
-    console.log("inner", pokemonData),
-      set(() => ({
-        playerHand: pokemonData,
-      }));
+    set(() => ({
+      playerHand: pokemonData,
+    }));
   },
   generateOpponentHand: (pokemonData: PokemonCard[]) =>
     set(() => ({
@@ -154,23 +153,20 @@ const useGameStore = create<GameState>()((set, get) => ({
     statName: string | null,
     statValue: number | null,
   ) => {
-    console.log(statName, statValue),
-      set(() => ({
-        playerSelectedStat: { name: statName, value: statValue },
-      }));
+    set(() => ({
+      playerSelectedStat: { name: statName, value: statValue },
+    }));
   },
   setOpponentSelectedStat: (
     statName: string | null,
     statValue: number | null,
   ) => {
-    console.log("inside stat", statName, statValue),
-      set(() => ({
-        opponentSelectedStat: { name: statName, value: statValue },
-      }));
+    set(() => ({
+      opponentSelectedStat: { name: statName, value: statValue },
+    }));
   },
 
   checkScore: () => {
-    console.log("check score", get().playerHand, get().opponentHand);
     if (get().opponentHand.length === 0) {
       set(() => ({
         gameResult: "You Win!",

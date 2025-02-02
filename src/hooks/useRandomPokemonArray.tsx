@@ -6,13 +6,11 @@ async function getData(url: string) {
   return await res.json();
 }
 export default function useRandomPokemonArray(count: number, max: number) {
-  console.log("useRandomPokemonArray");
   const [randomIntArray, setRandomIntArray] = useState([] as number[]);
 
   useEffect(() => {
     const newArray = getRandomIntArray(count, max);
     setRandomIntArray(newArray);
-    console.log(newArray, "newArray set");
   }, []);
 
   const queryResults = useQueries({

@@ -54,7 +54,6 @@ function GamePage() {
     }
   }, [playerCards.pending, opponentCards.pending]);
 
-  console.log("formatted", formattedPlayerCards, formattedOpponentCards);
   return (
     <div className="bg-blue-gradient">
       <main className="">
