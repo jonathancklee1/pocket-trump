@@ -3,7 +3,7 @@ import useGameStore from "../store/GameStore";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 function ResultPage() {
-  const { resetStore, gameResult } = useGameStore();
+  const { resetStore, gameResult, opponent } = useGameStore();
 
   useGSAP(() => {
     gsap.from("#play-again-button", {
@@ -40,8 +40,8 @@ function ResultPage() {
           className="heebo-font mb-12 text-center text-4xl font-bold text-white"
         >
           {gameResult === "You Win!"
-            ? "You have beaten your opponent!"
-            : "Your opponent has beaten you! Battle again!"}
+            ? `You have beaten ${opponent.name}!`
+            : `${opponent.name} has beaten you! Battle again!`}
         </h2>
       </div>
       <Link

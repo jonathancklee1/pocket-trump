@@ -2,8 +2,15 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
+import useGameStore from "../store/GameStore";
+import Gary from "../assets/images/gary.webp";
+import N from "../assets/images/n.png";
+import Barry from "../assets/images/barry.jpg";
 function MenuPage() {
   const [gameType, setGameType] = useState<string | null>(null);
+
+  const { opponent, setOpponent } = useGameStore();
+
   gsap.registerPlugin(useGSAP);
   useGSAP(() => {
     gsap.from("#start-button", {
@@ -16,6 +23,21 @@ function MenuPage() {
       opacity: 0,
     });
   });
+
+  const opponentProfileArray = [
+    {
+      name: "Blue Oak",
+      avatar: Gary,
+    },
+    {
+      name: "Barry",
+      avatar: Barry,
+    },
+    {
+      name: "N",
+      avatar: N,
+    },
+  ];
 
   return (
     <div className="bg-blue-gradient flex h-screen flex-col items-center justify-center px-4 text-white">
@@ -36,6 +58,31 @@ function MenuPage() {
           The first to take all of the cards from the opponent's hand wins the
           game!
         </p>
+        <h2
+          id="heading"
+          className="heebo-font mb-4 text-center text-2xl md:text-3xl"
+        >
+          Choose your Opponent
+        </h2>
+
+        <div className="mb-8 flex items-center justify-center gap-4 md:mb-12">
+          {opponentProfileArray.map((rival) => {
+            return (
+              <button
+                className={`flex flex-col items-center justify-center gap-4 rounded-xl px-3 py-2 text-xl font-bold hover:scale-105`}
+                onClick={() => setOpponent(rival.name, rival.avatar)}
+                key={rival.name}
+              >
+                <img
+                  src={rival.avatar}
+                  alt=""
+                  className={`size-12 rounded-full bg-white object-cover object-top ${opponent.name === rival.name && "border-4 border-[#42a409]"}`}
+                />
+                {rival.name}
+              </button>
+            );
+          })}
+        </div>
         <h2
           id="heading"
           className="heebo-font mb-4 text-center text-2xl md:text-3xl"

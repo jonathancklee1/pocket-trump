@@ -49,6 +49,7 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
     playerHand,
     opponentHand,
     gameResult,
+    opponent,
   } = useGameStore();
 
   useEffect(() => {
@@ -105,8 +106,8 @@ function GameBoard({ playerCards, opponentCards }: GameBoardProps) {
           <PlayerStatus
             isInverse
             handCount={opponentHand.length}
-            name="Opponent"
-            avatar={Gary}
+            name={opponent.name}
+            avatar={opponent.avatar}
           />
         </div>
         <div

@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App.tsx";
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename={"/pocket-trump/"}>
+  <BrowserRouter basename={"/"}>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>

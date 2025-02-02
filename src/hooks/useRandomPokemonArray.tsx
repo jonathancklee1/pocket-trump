@@ -28,9 +28,6 @@ export default function useRandomPokemonArray(count: number, max: number) {
     },
   });
 
-  // const data = queryResults.map((result) => result?.data);
-  // console.log(queryResults);
-
   if (!queryResults.pending) {
     return queryResults;
   } else {

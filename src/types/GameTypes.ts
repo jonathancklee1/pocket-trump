@@ -1,11 +1,16 @@
 export interface GameState {
+  opponent: {
+    name: string;
+    avatar: string;
+  };
   playerHand: [];
   opponentHand: [];
   playerActiveCard: PokemonCard;
   opponentActiveCard: PokemonCard;
-  gameResult: string;
+  gameResult: string | null;
   playerSelectedStat: { name: string | null; value: number | null };
   opponentSelectedStat: { name: string | null; value: number | null };
+  setOpponent: (name: string, avatar: string) => void;
   generatePlayerHand: (pokemonData: PokemonCard[]) => void;
   generateOpponentHand: (pokemonData: PokemonCard[]) => void;
   setPlayerActiveCard: () => void;

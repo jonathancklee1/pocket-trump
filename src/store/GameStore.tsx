@@ -2,6 +2,10 @@ import { create } from "zustand";
 import { GameState, PokemonCard } from "../types/GameTypes";
 
 const useGameStore = create<GameState>()((set, get) => ({
+  opponent: {
+    name: "",
+    avatar: "",
+  },
   playerHand: [],
   opponentHand: [],
   playerActiveCard: {
@@ -77,6 +81,13 @@ const useGameStore = create<GameState>()((set, get) => ({
     value: null,
   },
   gameResult: null,
+  setOpponent: (name: string, avatar: string) =>
+    set(() => ({
+      opponent: {
+        name: name,
+        avatar: avatar,
+      },
+    })),
   generatePlayerHand: (pokemonData: PokemonCard[]) => {
     console.log("inner", pokemonData),
       set(() => ({
